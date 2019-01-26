@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { AuthGuard, CustExtBrowserXhr } from './shared';
 import {AuthService,AUTH_PROVIDERS,LoggedInGuard} from './shared'
+import { AppService} from './app.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -37,7 +38,7 @@ export function HttpLoaderFactory(http: Http) {
         })
     ],
     providers: [
-    //   AuthGuard,
+      AppService,
       AuthService,
       AUTH_PROVIDERS,
       LoggedInGuard,

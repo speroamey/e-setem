@@ -1,71 +1,36 @@
 <?php
-require '../vendor/autoload.php';
-// use \RedBeanPHP\R as R;
-class_alias('\RedBeanPHP\R','R');
-$db_host = "localhost";
-$db_dbname = "sav_db";
-$db_username = "root";
-$db_password = "";
-R::setup ('mysql:host='.$db_host.';dbname='.$db_dbname.';chartset=utf8',''.$db_username.'',''.$db_password.'');
+use Illuminate\Database\Capsule\Manager as Capsule;
+if (PHP_SAPI == 'cli-server') {
+    // To help the built-in PHP dev server, check if the request was actually for
+    // something which should probably be served as a static file
+    $url  = parse_url($_SERVER['REQUEST_URI']);
+    $file = __DIR__ . $url['path'];
+    if (is_file($file)) {
+        return false;
+    }
+}
+
+require __DIR__ . '/../vendor/autoload.php';
+
+session_start();
+// $user = new App\Database\Migrations\Migration;
+// var_dump($user);
+// die();
+// Instantiate the app
+$settings = require __DIR__ . '/../src/settings.php';
+$app = new \Slim\App($settings);
 
 
-$app = new Slim\App([
-    "settings"  => [
-        "determineRouteBeforeAppMiddleware" => true,
-        "displayErrorDetails" => true
-    ]
-]);
+// Set up dependencies
+require __DIR__ . '/../src/dependencies.php';
 
+// Register middleware
+require __DIR__ . '/../src/middleware.php';
 
-// This is the middleware
-// It will add the Access-Control-Allow-Methods header to every request
-$app->options('/{routes:.+}', function ($request, $response, $args) {
-    return $response;
-});
+$app->getContainer()->get('db');
 
-$app->add(function ($req, $res, $next) {
-    $response = $next($req, $res);
-    return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-});
+// Register routes
+require __DIR__ . '/../src/routes.php';
 
-
-
-// $app->add(function($request, $response, $next) {
-//     $route = $request->getAttribute("route");
-//
-//     $methods = [];
-//
-//     if (!empty($route)) {
-//         $pattern = $route->getPattern();
-//
-//         foreach ($this->router->getRoutes() as $route) {
-//             if ($pattern === $route->getPattern()) {
-//                 $methods = array_merge_recursive($methods, $route->getMethods());
-//             }
-//         }
-//         //Methods holds all of the HTTP Verbs that a particular route handles.
-//     } else {
-//         $methods[] = $request->getMethod();
-//     }
-//
-//     $response = $next($request, $response);
-//
-//
-//     return $response->withHeader("Access-Control-Allow-Methods", implode(",", $methods));
-// });
-
-// require 'utils.php';
-require 'authentication.php';
-require 'prestation.php';
-require 'client.php';
-require 'technicien.php';
-require 'equipement.php';
-require 'plainte.php';
-require 'traitement.php';
-require 'smsmail.php';
-
-
+// Run app
 $app->run();

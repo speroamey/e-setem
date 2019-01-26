@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         // let obj=localStorage.getItem('currentUser');
-        this.username=JSON.parse(localStorage.getItem('currentUser')).username;
+        this.username=sessionStorage.getItem('jhi-authenticationtoken');
     }
 
     isToggled(): boolean {
@@ -41,7 +41,9 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        localStorage.removeItem('jhi-authenticationtoken');
+        sessionStorage.removeItem('jhi-authenticationtoken');
+        sessionStorage.removeItem('savefrom-helper-extension');
 
     }
 

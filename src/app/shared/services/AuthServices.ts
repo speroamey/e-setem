@@ -5,14 +5,15 @@ import { ResponseWrapper } from '../model/response-wrapper.model';
 
 import { Http, Response, URLSearchParams,BaseRequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { AppService } from 'app/app.service';
 
 @Injectable()
 export class AuthService {
   public token: string;
-  private loginUrl = HOST + '/login';
-  private registerUrl = HOST +'/register'
+  private loginUrl = HOST + '/api/users/signin';
+  private registerUrl = HOST +'/api/users//register'
 
-   constructor( private router: Router,private http: Http) {}
+   constructor( private router: Router,private http: Http, private appService: AppService) {}
 
   register(data){
     const options: BaseRequestOptions = new BaseRequestOptions();
@@ -24,27 +25,27 @@ export class AuthService {
           console.log(res.json());
           return res.json();
 
-          // if(data){
-          //   localStorage.setItem('currentUser', JSON.stringify({ username: data.username, token: data.password }));
-          //   return true;
-          // }else{
-          //   return false;
-          // }
 
         })
     }
 
     login(data){
       const options: BaseRequestOptions = new BaseRequestOptions();
-      options.headers.append('Content-Type','application/json')
-
       return this.http
         .post(this.loginUrl, data, options)
           .map((res) => {
-            console.log('auth service',res)
             let data=res.json();
+            console.log(data);
             if(data){
-              localStorage.setItem('currentUser', JSON.stringify({ username: data.username, token: data.password }));
+              localStorage.setItem('jhi-authenticationtoken', data.token);
+              sessionStorage.setItem('jhi-authenticationtoken', data.username);
+              sessionStorage.setItem('roles', data.roles);
+              console.log(data);
+              
+              sessionStorage.setItem('user_id', data.id);
+              // this.appService._roles=data.roles;
+              // console.log( this.appService._roles);
+              
               return true;
             }else{
               return false;

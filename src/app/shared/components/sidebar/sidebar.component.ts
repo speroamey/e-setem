@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from 'app/app.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -8,6 +9,11 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
     isActive = false;
     showMenu = '';
+    public role;
+
+    constructor( private appService: AppService){
+
+    }
     eventCalled() {
         this.isActive = !this.isActive;
     }
@@ -18,4 +24,13 @@ export class SidebarComponent {
             this.showMenu = element;
         }
     }
+    ngOnInit(){
+        this.role=sessionStorage.getItem('roles');
+    }
+
+   get user_role(){
+       if(this.role == 'ADMIN'){
+        return true;
+       }
+   }
 }

@@ -8,7 +8,7 @@ export class LoggedInGuard implements CanActivate {
   canActivate(){
     // console.log(this.authService.isLoggedIn())
     // return this.authService.isLoggedIn();
-    if (localStorage.getItem('currentUser')) {
+    if (localStorage.getItem('jhi-authenticationtoken')) {
               // logged in so return true
               return true;
           }

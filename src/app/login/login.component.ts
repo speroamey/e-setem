@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import {AuthService} from '../shared/services/AuthServices';
+import { AppService } from 'app/app.service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     message: string;
     private data:any;
     private loading = false;
-    constructor(public router: Router, private authService: AuthService) {
+    constructor(public router: Router, private authService: AuthService, appService: AppService) {
         this.credentials = {};
     }
 
@@ -24,19 +25,7 @@ export class LoginComponent implements OnInit {
          this.authService.logout();
     }
 
-    // onLoggedin() {
-    //   this.message = '';
-    //   console.log(this.password);
-    //   if (!this.authService.login(this.username, this.password)) {
-    //     this.message = 'Incorrect credentials.';
-    //     console.log(this.message);
-    //     setTimeout(function() {
-    //       this.message = '';
-    //     }.bind(this), 2500);
-    //   }
-    //   return false;
-    //     // localStorage.setItem('isLoggedin', 'true');
-    // }
+   
 
     onSignIn() {
       this.message = '';
@@ -57,14 +46,9 @@ export class LoginComponent implements OnInit {
             // })
         });
 
-        // this.message = 'Incorrect credentials.';
-        // console.log(this.message);
-        // setTimeout(function() {
-        //   this.message = '';
-        // }.bind(this), 2500);
+
       }
-    //   return false;
-        // localStorage.setItem('isLoggedin', 'true');
+    
     }
 
 }

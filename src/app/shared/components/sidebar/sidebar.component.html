@@ -3,62 +3,102 @@
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
-
-
-        <a [routerLink]="['/projets']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Prestations' | translate }}
-        </a>
-
-        <a [routerLink]="['/clients']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Clients' | translate }}
-        </a>
-        <a [routerLink]="['/techniciens']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Techniciens' | translate }}
-        </a>
-        <a [routerLink]="['/equipements']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Equipements' | translate }}
-        </a>
-        <a [routerLink]="['/plaintes']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Plaintes' | translate }}
-        </a>
-        <a [routerLink]="['/traitements']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Traitement' | translate }}
+      
+        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
+            <i class="fa fa-fw fa-user"></i>&nbsp;Utilisateurs
         </a>
 
 
-        <!-- <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
-        </a>
-        <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
-        </a>
-        <a [routerLink]="['/bs-element']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-desktop"></i>&nbsp;{{ 'Boostrap Element' | translate }}
-        </a> -->
-        <!-- <a [routerLink]="['/grid']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-wrench"></i>&nbsp;{{ 'Boostrap Grid' | translate }}
-        </a>
-        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
-        </a>
+ 
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
-                <span><i class="fa fa-plus"></i>&nbsp; {{ 'Menu' | translate }}</span>
+                <span><i class="fa fa-fw fa-wrench"></i>&nbsp; Paramètres</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <li [routerLink]="['/parametres/pieces-administratives']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Pièces Administratives</span></a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <li [routerLink]="['/parametres/competences']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Compétences</span></a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <li [routerLink]="['/parametres/branches']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Branches</span></a>
+                    </li>
+
+                    <li [routerLink]="['/parametres/fonctions']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Fonctions</span></a>
+                    </li>
+                    <li [routerLink]="['/parametres/antennes-sites']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Antennenes Sites</span></a>
+                    </li>
+                    <li [routerLink]="['/parametres/departements-services']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Départements & Services</span></a>
+                    </li>
+                    <li [routerLink]="['/parametres/systemes']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span>Systèmes</span></a>
                     </li>
                 </ul>
             </li>
-        </div> -->
+        </div>
+
+
+
+
+
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('rh')">
+                <span><i class="fa fa-fw fa-file"></i>&nbsp; RH/Consultants</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'rh'">
+                <ul class="submenu">
+                    <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                       <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
+                    </li>
+                    <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+
+
+
+        <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('rh')">
+                    <span><i class="fa fa-fw fa-file"></i>&nbsp; Immobiliers</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'rh'">
+                    <ul class="submenu">
+                        <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                           <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
+                        </li>
+                        <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
+
+
+
+            <div class="nested-menu">
+                    <a class="list-group-item" (click)="addExpandClass('rh')">
+                        <span><i class="fa fa-fw fa-file"></i>&nbsp; Missions</span>
+                    </a>
+                    <li class="nested" [class.expand]="showMenu === 'rh'">
+                        <ul class="submenu">
+                            <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                               <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
+                            </li>
+                            <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
+                                <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
         <!-- <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
         </a>

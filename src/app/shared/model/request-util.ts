@@ -15,22 +15,25 @@ export const createRequestOption = (req?: any,accept:boolean=false): BaseRequest
 
     options.params = params;
   }
-  // let token =
-    // window.localStorage.getItem('jhi-authenticationtoken') ||
-    // window.sessionStorage.getItem('jhi-authenticationtoken');
-    // options.headers.append('accept', '*/*');
+  let token =
+    window.localStorage.getItem('jhi-authenticationtoken');
+    window.sessionStorage.getItem('jhi-authenticationtoken');
 
-    // options.headers.append(
-    //   'Access-Control-Allow-Headers',
-    //   'X-Total-Count, Link'
-    // );
-    // options.headers.append('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
-    // options.headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  // if (token) {
-  //   // token = token.replace(/^["']/, '');
-  //   // token = token.replace(/["']$/, '');
-  //   options.headers.append('Authorization', 'Bearer ' + token);
-  // }
+
+    options.headers.append('Accept', '*/*');
+
+    options.headers.append(
+       'Access-Control-Allow-Headers',
+       'X-Total-Count,Access-Control-*, Link,X-Requested-With, Content-Type, Accept, Origin, Authorization'
+     );
+     options.headers.append('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+     options.headers.append('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT');
+    //  options.headers.append('Content-Type', 'application/json');
+  if (token) {
+      // token = token.replace(/^["']/, '');
+       token = token.replace(/["']$/, '');
+       options.headers.append('Authorization', 'Bearer ' + token);
+  }
   return options;
 };
 export const getUniqueId = (
