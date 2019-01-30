@@ -12,7 +12,8 @@ const routes: Routes = [
       { path: 'affiliations', loadChildren: './affiliations/affiliations.module#AffiliationsModule' },
       { path: 'outils-informatiques', loadChildren: './outils-informatiques/outils-informatiques.module#OutilsInformatiquesModule' },
       { path: 'formations', loadChildren: './formations/formations.module#FormationsModule' },
-  ]}
+      { path: 'experiences-professionnelles', loadChildren: './experiences-professionnelles/formations.module#FormationsModule' },
+    ]}
 ];
 
 @NgModule({

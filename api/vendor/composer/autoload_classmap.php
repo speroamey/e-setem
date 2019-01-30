@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Migration\\Migration' => $baseDir . '/src/Database/Migrations/Migration.php',
-    'App\\Models\\Affiliation' => $baseDir . '/src/app/Models/Rh_affiliations.php',
+    'App\\Models\\Affiliations' => $baseDir . '/src/app/Models/Rh_affiliations.php',
     'App\\Models\\AntennesSites' => $baseDir . '/src/app/Models/Parametres.php',
     'App\\Models\\AssurancesImmobiliere' => $baseDir . '/src/app/Models/Immobiliers.php',
     'App\\Models\\Branches' => $baseDir . '/src/app/Models/Parametres.php',

@@ -10,12 +10,12 @@ $app->group("/api", function() use ($app){
  
     $app->group("/rh", function() use ($app){
 
-        $app->group("/formations", function() use ($app){
+        $app->group("/affiliations", function() use ($app){
             $app->get("/list/{id}", function(Request $request,Response $response,$args){              
                 $id= $request->getAttribute('id');
-                $formations = Formations::where('user_id', $id)->get();
+                $affiliations = Affiliations::where('user_id', $id)->get();
                 return $response->withStatus(200)
-                    ->withJson($formations);
+                    ->withJson($affiliations);
             });
            
             $app->post("/add", function(Request $request, Response $response,$args){
@@ -27,18 +27,16 @@ $app->group("/api", function() use ($app){
                 $end_date=strtotime($data['end_date']) ;
                 $end_date = date('Y-m-d H:i:s', $end_date); 
                
-                $formations = Formations::create([
+                $affiliations = Affiliations::create([
                     'user_id'=>$data['user_id'],
-                    'ecole'=>$data['ecole'],
-                    'diplome'=>$data['diplome'],
-                    'domaine'=>$data['domaine'],
-                    'description'=>$data['description'],
+                    'nom_association'=>$data['nom_association'],
+                    'objet'=>$data['objet'],
                     'start_date'=>$start_date,
                     'end_date'=>$end_date,
                 ]);
             
                 return $response->withStatus(200)
-                                ->withJson($formations);
+                                ->withJson($affiliations);
             });
 
             $app->put("/update/{id}", function(Request $request, Response $response,$args){
@@ -52,23 +50,21 @@ $app->group("/api", function() use ($app){
                 $end_date = date('Y-m-d H:i:s', $end_date); 
 
 
-                $formations = Formations::where('id', $id)
+                $affiliations = Affiliations::where('id', $id)
                     ->update([
                         'user_id'=>$data['user_id'],
-                        'ecole'=>$data['ecole'],
-                        'diplome'=>$data['diplome'],
-                        'domaine'=>$data['domaine'],
-                        'description'=>$data['description'],
+                        'nom_association'=>$data['nom_association'],
+                        'objet'=>$data['objet'],
                         'start_date'=>$start_date,
                         'end_date'=>$end_date,
                     ]);
                 return $response->withStatus(200)
-                                ->withJson($formations );
+                                ->withJson($affiliations );
             });
                 
             // $app->delete("/delete/{id}", function(Request $request, Response $response,$args){
             //     $id= $request->getAttribute('id');
-            //     $personnels = Formations::where('id', $id)->delete();
+            //     $personnels = Affiliations::where('id', $id)->delete();
             //     return $response->withStatus(200)
             //                     ->withJson($personnels ) ;
             // });

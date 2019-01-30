@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
  
-class Affiliation extends \Illuminate\Database\Eloquent\Model {  
+class Affiliations extends \Illuminate\Database\Eloquent\Model {  
     
     protected $fillable=[
         'user_id',

@@ -1,130 +1,129 @@
-
-
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-      <h4 class="modal-title">Branches</h4>
-      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  <div class="modal-body">
-          <form role="form" #brancheForm="ngForm" name="brancheForm">
-             
+    <div class="modal-header">
+        <h4 class="modal-title">Branches</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" #brancheForm="ngForm" name="brancheForm">
+
 
             <div class="form-group">
                 <label class="form-control-label" for="DescriptionCode">Nom de l'outil</label>
-                <input type="text" class="form-control" [(ngModel)]="branche.nom" name="libelle"  id="code" required>
+                <input type="text" class="form-control" [(ngModel)]="branche.nom" name="libelle" id="code" required>
             </div>
-            
+
             <div class="form-group">
                 <label class="form-control-label" for="IdPrestation"> Types d'outils</label>
-                <select class="form-control" [(ngModel)]="branche.type" name="roles"id="roles" required>
+                <select class="form-control" [(ngModel)]="branche.type" name="roles" id="roles" required>
                     <option [ngValue]="type" *ngFor="let type of types">{{type}}</option>
                 </select>
             </div>
 
-            
+
             <div class="form-group">
                 <label class="form-control-label" for="niveau">Niveau</label>
-                <select class="form-control" [(ngModel)]="branche.niveau" name="niveau"id="niveau" required>
+                <select class="form-control" [(ngModel)]="branche.niveau" name="niveau" id="niveau" required>
                     <option [ngValue]="niveau" *ngFor="let niveau of niveaux">{{niveau}}</option>
                 </select>
             </div>
 
-           
-         
+
+
 
         </form>
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
-  </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
+    </div>
 </ng-template>
 
 
 <!-- Template de suppression -->
 <ng-template #delete let-c="close" let-d="dismiss">
-  <div class="modal-header">
-      <h4 class="modal-title">Suppression</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  <div class="modal-body">
-      <div class="ustify-content-center">Voulez vous vraiment supprimer la branche?</div>
-  </div>
-  <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+    <div class="modal-header">
+        <h4 class="modal-title">Suppression</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="ustify-content-center">Voulez vous vraiment supprimer la branche?</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
 
-      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
-  </div>
+        <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+    </div>
 </ng-template>
 
 
 <div [@routerTransition]>
-  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
-  <div class="row">
-      <div class="col-md-12">
-      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
-          <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des Outils Informatiques</div>
-              <div class="card-block table-responsive">
-                  <table class="table table-hover table-striped">
-                      <!-- <thead>
+    <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <div class="card mb-12 col-md-12">
+                <div class="card-header">Liste des Outils Informatiques</div>
+                <div class="card-block table-responsive">
+                    <table class="table table-hover table-striped">
+                        <!-- <thead>
                       <tr>
                           <th>ID</th>
                           <th>Libellé</th>
                           <th>Actions</th>
                       </tr>
                       </thead> -->
-                      <tbody>
-                      <tr *ngFor="let branche of branches" style="cursor:pointer;">
-                        
-                          <td >
-                            <div class="card">
-                                <div class="card-header">
-                                    <span> {{branche.nom.toUpperCase()}} </span>
-                                    <span (click)="open(content,branche)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title">Special title treatment</h5> -->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fa fa-desktop" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p></p>
-                                            <p class="card-text"> Nom de l'outil : {{branche.nom}} </p>
-                                            <p class="card-text"> Type d'outil : {{branche.type}} </p>  
-                                            <p class="card-text"> Niveau de maitrise : {{branche.niveau}} </p>                                        
-                                        </div>
-                        
-                                    </div>
-                        
-                                </div>
-                        </div>
-                          </td>
-                         
+                        <tbody>
+                            <tr *ngFor="let branche of branches" style="cursor:pointer;">
 
-                          <td>
-                              <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', branche.id]">
+                                <td>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <span> {{branche.nom.toUpperCase()}} </span>
+                                            <span (click)="open(content,branche)" class="float-right btn btn-default float-right"
+                                                style="cursor:pointer;">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- <h5 class="card-title">Special title treatment</h5> -->
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <i class="fa fa-desktop" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p></p>
+                                                    <p class="card-text"> Nom de l'outil : {{branche.nom}} </p>
+                                                    <p class="card-text"> Type d'outil : {{branche.type}} </p>
+                                                    <p class="card-text"> Niveau de maitrise : {{branche.niveau}} </p>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+
+                                <td>
+                                    <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', branche.id]">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                               </span> -->
-                              <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,branche)">
+                                    <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,branche)">
                                   <i class="fa fa-pencil" aria-hidden="true"></i>
                               </span> -->
-                              <!-- <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,branche)">
+                                    <!-- <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,branche)">
                                   <i class="fa fa-trash-o" aria-hidden="true"></i>
                               </span> -->
-                          </td>
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-      </div>
-  </div>
+        </div>
+    </div>
 </div>

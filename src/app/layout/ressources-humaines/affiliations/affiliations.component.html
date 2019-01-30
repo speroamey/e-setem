@@ -2,7 +2,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-      <h4 class="modal-title">Branches</h4>
+      <h4 class="modal-title">Affiliation</h4>
       <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>
@@ -12,15 +12,37 @@
              
 
             <div class="form-group">
-                <label class="form-control-label" for="DescriptionCode">Code de la branche</label>
-                <input type="text" class="form-control" [(ngModel)]="branche.code" name="libelle"  id="code" required>
+                <label class="form-control-label" for="DescriptionCode">Nom de l'association</label>
+                <input type="text" class="form-control" [(ngModel)]="branche.nom_association" name="libelle"  id="code" required>
             </div>
-            <div class="form-group">
-              <label class="form-control-label" for="DescriptionPiece">Libellé de la branche</label>
-              <input type="text" class="form-control" [(ngModel)]="branche.libelle" name="libelle"  id="libelle" required>
-          </div>
-
            
+
+          <div class="form-group">
+            <label class="form-control-label" for="start_date">Date de début</label>
+            <div class="input-group">
+                <input type="text" class="form-control " [(ngModel)]="branche.start_date" name="start_date"
+                    ngbDatepicker #d="ngbDatepicker" id="start_date" required>
+                <button class="input-group-addon" (click)="d.toggle()" type="button">
+                    <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="end_date">Date de Fin</label>
+            <div class="input-group">
+                <input type="text" class="form-control " [(ngModel)]="branche.end_date" name="end_date"
+                    ngbDatepicker #e="ngbDatepicker" id="end_date" required>
+                <button class="input-group-addon" (click)="e.toggle()" type="button">
+                    <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="objet">Objet de l'association</label>
+            <input type="text" class="form-control" [(ngModel)]="branche.objet" name="objet"  id="objet" required>
+        </div>
          
 
         </form>
@@ -57,35 +79,39 @@
       <div class="col-md-12">
       <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
           <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des Branches</div>
+              <div class="card-header">Liste des Affiliations</div>
               <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
-                      <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Libellé</th>
-                          <!-- <th>Date d'expiration</th> -->
-                          <th>Actions</th>
-                      </tr>
-                      </thead>
+                     
                       <tbody>
                       <tr *ngFor="let branche of branches" style="cursor:pointer;">
                         
-                          <td >{{branche.id}}</td>
-                          <td>{{branche.libelle}}</td>
-                       
-                          <!-- <td>{{branche.expiration_date | date:yMdjm}}</td> -->
 
                           <td>
-                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', branche.id]">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                              </span>
-                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,branche)">
-                                  <i class="fa fa-pencil" aria-hidden="true"></i>
-                              </span>
-                              <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,branche)">
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              </span>
+                            <div class="card">
+                                <div class="card-header">
+                                    <span> {{branche.nom_association.toUpperCase()}} </span>
+                                    <span (click)="open(content,branche)" class="float-right btn btn-default float-right"
+                                        style="cursor:pointer;">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="card-body">
+                                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p></p>
+                                            <p class="card-text"> Nom de l'association : {{branche.nom_association}} </p>
+                                            <p class="card-text"> Date : {{branche.start_date | date:yMdjm}} - {{branche.end_date | date:yMdjm}}</p>
+                                            <p class="card-text"> Objet : {{branche.objet}} </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
                           </td>
                       </tr>
                       </tbody>

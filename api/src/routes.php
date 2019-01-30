@@ -16,6 +16,8 @@ require __DIR__ . '/app/endpoints/ressources_humaines.php';
 require __DIR__ . '/app/endpoints/rh_formations.php';
 require __DIR__ . '/app/endpoints/immobiliers.php';
 require __DIR__ . '/app/endpoints/rh_outils_informatiques.php';
+require __DIR__ . '/app/endpoints/rh_affiliations.php';
+require __DIR__ . '/app/endpoints/rh_experiences_professionnelles.php';
 
 
 

@@ -1,6 +1,6 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Formations</h4>
+        <h4 class="modal-title">Expériences Professionnelles</h4>
         <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -10,19 +10,26 @@
 
 
             <div class="form-group">
-                <label class="form-control-label" for="ecole">Ecole</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.ecole" name="ecole" id="ecole" required>
+                <label class="form-control-label" for="ecole">Nom de l'employeur</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.nom_employeur" name="nom_employeur" id="nom_employeur" required>
             </div>
 
             <div class="form-group">
-                <label class="form-control-label" for="Description">Diplôme</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.diplome" name="diplome" id="diplome"
+                <label class="form-control-label" for="Description">Fonction/Poste</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.fonctions" name="fonctions" id="fonctions"
                     required>
             </div>
 
             <div class="form-group">
-                <label class="form-control-label" for="domaine">Domaine</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.domaine" name="domaine" id="domaine"
+                <label class="form-control-label" for="pays">Pays</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.pays" name="pays" id="pays"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="resume">Resumé des activités réalisé</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.resume" name="resume" id="resume"
                     required>
             </div>
 
@@ -49,11 +56,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-control-label" for="Description">Description</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.description" name="description" id="description"
-                    required>
-            </div>
+           
 
 
         </form>
@@ -90,7 +93,7 @@
         <div class="col-md-12">
             <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des formations</div>
+                <div class="card-header">Liste des Experiences Professionnelles</div>
                 <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                      
@@ -100,7 +103,7 @@
                           <td>
                             <div class="card">
                                 <div class="card-header">
-                                    <span> {{formation.ecole.toUpperCase()}} </span>
+                                    <span> {{formation.nom_employeur.toUpperCase()}} </span>
                                     <span (click)="open(content,formation)" class="float-right btn btn-default float-right"
                                         style="cursor:pointer;">
                                         <i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -109,13 +112,13 @@
                                     <!-- <h5 class="card-title">Special title treatment</h5> -->
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <i class="fa fa-university" aria-hidden="true"></i>
+                                            <i class="fa fa-copy" aria-hidden="true"></i>
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom de l'école : {{formation.ecole}} </p>
+                                            <p class="card-text"> Nom de l'employeur : {{formation.nom_employeur}} </p>
                                             <p class="card-text"> Date : {{formation.start_date | date:yMdjm}} - {{formation.end_date | date:yMdjm}}</p>
-                                            <p class="card-text"> Diplome : {{formation.diplome}}  <span> Domaine: {{formation.domaine}}</span> </p>
+                                            <p class="card-text"> Fonction/Poste : {{formation.fonctions}}  <span> Resumé: {{formation.resume}}</span> </p>
                                         </div>
 
                                     </div>

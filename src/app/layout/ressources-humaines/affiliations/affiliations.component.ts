@@ -29,10 +29,27 @@ export class AffiliationsComponent implements OnInit {
      this.load();
     }
 
+    public convertDate(arg){
+      let obj=new Date(arg);
+      let _date;
+      let day = obj.getDate();
+      let month = obj.getMonth()+1;
+      let year = obj.getFullYear();
+      
+      return _date={
+        day:day,
+        month:month,
+        year:year
+      }
+    }
+
+    
     open(content,pres?) {
 
       if(pres !== undefined){
         let tmp= JSON.parse(JSON.stringify(pres))
+        tmp.start_date = this.convertDate(tmp.start_date);
+        tmp.end_date = this.convertDate(tmp.end_date);
         this.branche =tmp;
       }
       // console.log(this.branche)
@@ -55,7 +72,7 @@ export class AffiliationsComponent implements OnInit {
   }
 
   private load(){
-    this.pieceModalService.load()
+    this.pieceModalService.load(sessionStorage.getItem('user_id'))
     .subscribe(result => {
             // console.log("result");
             if (result) {
@@ -67,8 +84,19 @@ export class AffiliationsComponent implements OnInit {
     });
   }
 
+  extractDay(arg){
+    let day = arg.day;
+    let month = arg.month-1;
+    let year = arg.year;
+    let dat =new Date(year,month,day);
+    return dat;
+  }
+
   save(){
-   
+    
+    this.branche.user_id = sessionStorage.getItem('user_id');
+    this.branche.start_date = this.extractDay(this.branche.start_date);
+    this.branche.end_date = this.extractDay(this.branche.end_date);
     
     if (this.branche.id) {
         //call service

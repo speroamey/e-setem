@@ -7,9 +7,9 @@ import { Http, Response, URLSearchParams,BaseRequestOptions } from '@angular/htt
 import { Observable } from 'rxjs/Rx';;
 
 @Injectable()
-export class BranchesModalService {
+export class FormationsModalService {
   public token: string;
-  private plainteUrl = HOST + '/api/rh/affiliations/';
+  private plainteUrl = HOST + '/api/rh/experiences-professionnelles/';
 
    constructor( private router: Router,private http: Http) {
     //  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
