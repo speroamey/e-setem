@@ -3,13 +3,22 @@
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
-      
+
         <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
             <i class="fa fa-fw fa-user"></i>&nbsp;Utilisateurs
         </a>
 
+        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
+            <i class="fa fa-fw fa-agenda"></i>&nbsp;Agenda
+        </a>
 
- 
+        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
+            <i class="fa fa-fw fa-note"></i>&nbsp;Circ./Notes d'infos
+        </a>
+
+
+
+        
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <span><i class="fa fa-fw fa-wrench"></i>&nbsp; Paramètres</span>
@@ -47,13 +56,74 @@
 
 
         <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('rh')">
-                <span><i class="fa fa-fw fa-file"></i>&nbsp; RH/Consultants</span>
+            <a class="list-group-item" [routerLink]="['/ressources-humaines/fiche-renseignements']" (click)="addExpandClass('rh')">
+                <span><i class="fa fa-fw fa-file"></i>&nbsp;Renseignements</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'rh'">
                 <ul class="submenu">
+                    <li [routerLink]="['/ressources-humaines/identité-unique']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Identité unique</span></a>
+                    </li>
+                    <li [routerLink]="['/ressources-humaines/pièces-administratives']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Pièces Administratives</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/formations']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Formations</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/outils-informatiques']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Outils Informatique</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/affiliations']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Affiliations </span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/publications-réalisées']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Publications réalisées</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/aptitudes']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> aptitudes</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/langues']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Langues</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/experiences-professionnelles']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Expériences Professionnelles</span></a>
+                    </li>
+
+                    <li [routerLink]="['/ressources-humaines/personnes-ressources']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Personnes ressources</span></a>
+                    </li>
                     <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
-                       <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
+                        <a href="javascript:void(0)"><span> Signatures</span></a>
+                    </li>
+
+                    <!-- <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
+                    </li> -->
+                </ul>
+            </li>
+        </div>
+
+
+        <a routerLink="/ressources-humaines/documents" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
+            <i class="fa fa-fw fa-user"></i>&nbsp;Documents
+        </a>
+
+
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('immobiliers')">
+                <span><i class="fa fa-fw fa-file"></i>&nbsp; Immobiliers</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'immobiliers'">
+                <ul class="submenu">
+                    <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
                     </li>
                     <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
@@ -66,39 +136,20 @@
 
 
         <div class="nested-menu">
-                <a class="list-group-item" (click)="addExpandClass('rh')">
-                    <span><i class="fa fa-fw fa-file"></i>&nbsp; Immobiliers</span>
-                </a>
-                <li class="nested" [class.expand]="showMenu === 'rh'">
-                    <ul class="submenu">
-                        <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
-                           <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
-                        </li>
-                        <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
-                            <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-
-
-
-
-            <div class="nested-menu">
-                    <a class="list-group-item" (click)="addExpandClass('rh')">
-                        <span><i class="fa fa-fw fa-file"></i>&nbsp; Missions</span>
-                    </a>
-                    <li class="nested" [class.expand]="showMenu === 'rh'">
-                        <ul class="submenu">
-                            <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
-                               <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
-                            </li>
-                            <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
-                                <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
-                            </li>
-                        </ul>
+            <a class="list-group-item" (click)="addExpandClass('missions')">
+                <span><i class="fa fa-fw fa-file"></i>&nbsp; Missions</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'missions'">
+                <ul class="submenu">
+                    <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Personnels/Consultant</span></a>
                     </li>
-                </div>
+                    <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
         <!-- <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
         </a>

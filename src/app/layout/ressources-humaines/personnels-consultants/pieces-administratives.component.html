@@ -1,0 +1,229 @@
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Personnels / Consultants</h4>
+      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+          <form role="form" #pieceForm="ngForm" name="pieceForm">
+             
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Numero IFU</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.num_ifu" name="num_ifu"  id="num_ifu" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Type collaborateur *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.type_collaborateur" name="type_collaborateur"  id="type_collaborateur" required>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Antennes/sites *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.antennes_sites" name="antennes_sites"  id="antennes_sites" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Fonction *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.fonctions" name="fonctions"  id="fonctions" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece"> Départements services *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.departements_services" name="departements_services"  id="departements_services" >
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Numéro permis</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.num_permis" name="num_permis"  id="num_permis" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="categorie_permis">Catégorie permis</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.categorie_permis" name="categorie_permis"  id="categorie_permis" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="nom_prenoms">Nom et prénoms *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.nom_prenoms" name="nom_prenoms"  id="nom_prenoms" required>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="num_passport">Numero Passeport</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.num_passport" name="num_passport"  id="num_passport" >
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="datePiece">Date d'expiration Passeport</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="piece.expiration_passport"
+                     name="date" ngbDatepicker #expiration_passport="ngbDatepicker" id="expiration_passport" >
+                    <button class="input-group-addon" (click)="expiration_passport.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="num_cin">Numero CIN</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.num_cin" name="num_cin"  id="num_cin" >
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="datePiece">Date d'expiration CIN</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="piece.expiration_cin"
+                     name="date" ngbDatepicker #expiration_cin="ngbDatepicker" id="expiration_cin">
+                    <button class="input-group-addon" (click)="expiration_cin.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="datePiece">Date de naissance *</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="piece.date_naissance"
+                     name="date" ngbDatepicker #date_naissance="ngbDatepicker" id="date_naissance" required>
+                    <button class="input-group-addon" (click)="date_naissance.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="datePiece">Date d'embauche *</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="piece.date_embauche"
+                     name="date" ngbDatepicker #d="ngbDatepicker" id="date_embauche" required>
+                    <button class="input-group-addon" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="nationalite">nationalite *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.nationalite" name="nationalite"  id="nationalite" required >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="nationalite">adresse mail *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.address" name="address"  id="address" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="nationalite">Num Tél *</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.num_tel" name="num_tel"  id="num_tel" required>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="anciennete">anciennete</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.anciennete" name="anciennete"  id="anciennete" >
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="categorie">Catégorie</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.categorie" name="categorie"  id="categorie" >
+            </div>
+         
+
+        </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="pieceForm.form.invalid">Valider</button>
+  </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">Voulez vous vraiment supprimer la piece?</div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template>
+
+
+<div [@routerTransition]>
+  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+  <div class="row">
+      <div class="col-md-12">
+      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+          <div class="card mb-12 col-md-12">
+              <div class="card-header">Liste du personnels internes/externes</div>
+              <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                      <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nom Prénoms</th>
+                          <th>Fonctions</th>
+                          <th>Type collaborateur</th>
+                          <th>Date d'embauche</th>
+                          <th>Adresse mail</th>
+                          <th>Antennes/sites</th>
+                          <th>Expiration CIN</th>
+                          <th>Expiration Passeport</th>
+                          <!-- <th>Description de la piece</th> -->
+                         
+
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let piece of pieces" style="cursor:pointer;">
+                        
+                          <td >{{piece.id}}</td>
+                          <td>{{piece.nom_prenoms}}</td>
+                          <td>{{piece.fonctions}}</td>
+                          <td>{{piece.type_collaborateur}}</td>
+                          <td>{{piece.date_embauche | date:yMdjm}}</td>
+                          <td>{{piece.address}}</td>
+                          <td>{{piece.antennes_sites}}</td>
+                          <td>{{piece.expiration_cin | date:yMdjm }}</td>
+                          <!-- <td>{{piece.description_plainte}}</td> -->
+                          <td>{{piece.expiration_passport | date:yMdjm}}</td>
+
+                          <td>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', piece.id]">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,piece)">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,piece)">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </span>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

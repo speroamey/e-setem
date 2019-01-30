@@ -1,0 +1,105 @@
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Pieces Administratives</h4>
+      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+          <form role="form" #pieceForm="ngForm" name="pieceForm">
+             
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Libellé de la pièce</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.libelle" name="libelle"  id="libelle" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="datePiece">Date d'expiration</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="piece.expiration_date"
+                     name="date" ngbDatepicker #d="ngbDatepicker" id="datePiece" required>
+                    <button class="input-group-addon" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+         
+
+        </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="pieceForm.form.invalid">Valider</button>
+  </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">Voulez vous vraiment supprimer la piece?</div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template>
+
+
+<div [@routerTransition]>
+  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+  <div class="row">
+      <div class="col-md-12">
+      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+          <div class="card mb-12 col-md-12">
+              <div class="card-header">Liste des Pièces administratives</div>
+              <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                      <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Libellé</th>
+                          <!-- <th>Description de la piece</th> -->
+                          <th>Date d'expiration</th>
+
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let piece of pieces" style="cursor:pointer;">
+                        
+                          <td >{{piece.id}}</td>
+                          <td>{{piece.libelle}}</td>
+                          <!-- <td>{{piece.description_plainte}}</td> -->
+                          <td>{{piece.expiration_date | date:yMdjm}}</td>
+
+                          <td>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', piece.id]">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,piece)">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,piece)">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </span>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

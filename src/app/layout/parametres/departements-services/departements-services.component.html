@@ -1,0 +1,97 @@
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Compétenceses</h4>
+      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+          <form role="form" #brancheForm="ngForm" name="brancheForm">
+             
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionCode">Code du departement</label>
+                <input type="text" class="form-control" [(ngModel)]="departement.code" name="libelle"  id="code" required>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="DescriptionPiece">Libellé du departement</label>
+              <input type="text" class="form-control" [(ngModel)]="departement.libelle" name="libelle"  id="libelle" required>
+          </div>
+
+           
+         
+
+        </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
+  </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">Voulez vous vraiment supprimer le departement?</div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template>
+
+
+<div [@routerTransition]>
+  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+  <div class="row">
+      <div class="col-md-12">
+      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+          <div class="card mb-12 col-md-12">
+              <div class="card-header">Liste des départements/services</div>
+              <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                      <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Libellé</th>
+                          <!-- <th>Date d'expiration</th> -->
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let departement of departements" style="cursor:pointer;">
+                        
+                          <td >{{departement.id}}</td>
+                          <td>{{departement.libelle}}</td>
+                       
+
+                          <td>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', departement.id]">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,departement)">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,departement)">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </span>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Formations</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" #formationForm="ngForm" name="formationForm">
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="ecole">Ecole</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.ecole" name="ecole" id="ecole" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="Description">Diplôme</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.diplome" name="diplome" id="diplome"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="domaine">Domaine</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.domaine" name="domaine" id="domaine"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="start_date">Date de début</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="formation.start_date" name="start_date"
+                        ngbDatepicker #d="ngbDatepicker" id="start_date" required>
+                    <button class="input-group-addon" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="end_date">Date de Fin</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="formation.end_date" name="end_date"
+                        ngbDatepicker #e="ngbDatepicker" id="end_date" required>
+                    <button class="input-group-addon" (click)="e.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="Description">Description</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.description" name="description" id="description"
+                    required>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="formationForm.form.invalid">Valider</button>
+    </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<!-- <ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">Voulez vous vraiment supprimer la formation?</div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template> -->
+
+
+<div>
+    <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <div class="card mb-12 col-md-12">
+                <div class="card-header">Liste des formations</div>
+                <!-- <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                      <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Libellé</th>
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let formation of formations" style="cursor:pointer;">
+                        
+                          <td >{{formation.id}}</td>
+                          <td>{{formation.libelle}}</td>
+                       
+
+                          <td>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', formation.id]">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,formation)">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                              </span>
+                              <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,formation)">
+                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </span>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>

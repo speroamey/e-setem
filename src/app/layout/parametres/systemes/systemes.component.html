@@ -1,0 +1,144 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">systemes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form role="form" #brancheForm="ngForm" name="brancheForm">
+
+
+      <div class="form-group">
+        <label class="form-control-label" for="expiration_cin">Expiration cin</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.expiration_cin" name="expiration_cin" id="cin" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="expiration_passport">Expiration passeport</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.expiration_passport" name="expiration_passport"
+          id="expiration_passeport" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="prise_immobilisation">Prise immobilisation</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.prise_immobilisation" name="prise_immobilisation"
+          id="prise_immobilisation" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="expiration_pieces_administratives">Expiration pieces administratives</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.expiration_pieces_administratives" name="expiration_pieces_administratives" id="expiration_pieces_administratives" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="rapports">Rapports</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.rapports" name="rapport"
+          id="rapports" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="expiration_assurances"> Expiration assurances</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.expiration_assurances" name="expiration_assurances" id="expiration_assurances" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="expiration_visite_technique">Expiration visite technique</label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.expiration_visite_technique" name="expiration_visite_technique"
+          id="expiration_visite_technique" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="echeance_paiements">Echéance paiements </label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.echeance_paiements" name="echeance_paiements" id="echeance_paiements" required>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label" for="offre_manifestation_d_interet">Offre manifestation d'intérêt </label>
+        <input type="text" class="form-control" [(ngModel)]="systeme.offre_manifestation_d_interet" name="offre_manifestation_d_interet"
+          id="offre_manifestation_d_interet" required>
+      </div>
+
+
+
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
+  </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Suppression</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ustify-content-center">Voulez vous vraiment supprimer la systeme?</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+    <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template>
+
+
+<div [@routerTransition]>
+  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" *ngIf="systemes.length<1" (click)="open(content)"> + Ajouter</button>
+      <div class="card mb-12 col-md-12">
+        <div class="card-header">Paramètres Systemes</div>
+        <div class="card-block table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Expiration cin</th>
+                <th>Expiration Passeport</th>
+                <th>expiration pieces administratives </th>
+                <th>rapports </th>
+                <th>Prise immobilisations </th>
+                <th>expiration assurances </th>
+                <th>Expiration visite technique </th>
+                <th>Echéance paiements </th>
+                <th>Offre manifestation d'interet </th>
+                <!-- <th>Date d'expiration</th> -->
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let systeme of systemes" style="cursor:pointer;">
+
+                <td>{{systeme.expiration_cin}}</td>
+                <td>{{systeme.expiration_passeport}}</td>
+                <td>{{systeme.expiration_pieces_administratives}}</td>
+                <td>{{systeme.rapports}}</td>
+                <td>{{systeme.prise_immobilisation}}</td>
+                <td>{{systeme.expiration_assurances}}</td>
+                <td>{{systeme.expiration_visite_technique}}</td>
+                <td>{{systeme.echeance_paiements }}</td>
+                <td>{{systeme.offre_manifestation_d_interet}}</td>
+
+
+                <!-- <td>{{systeme.expiration_date | date:yMdjm}}</td> -->
+
+                <td>
+                  <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', systeme.id]">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </span> -->
+                  <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,systeme)">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </span>
+                  <span class="text" style="cursor:pointer; color:red;" (click)="open(delete,systeme)">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

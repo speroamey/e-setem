@@ -1,0 +1,128 @@
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Utilisateurs</h4>
+      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+          <form role="form" #brancheForm="ngForm" name="brancheForm">
+            <div class="form-group">
+              <label class="form-control-label" for="DescriptionPiece">Nom utilisateur</label>
+              <input type="text" class="form-control" [(ngModel)]="branche.username" name="libelle"  id="libelle" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="branche.email" name="email"  id="email" required>
+            </div>
+
+ 
+
+            <!-- <div class="form-group">
+                <label class="form-control-label" for="IdPrestation">Rôles utilisateur</label>
+                <select class="form-control" [(ngModel)]="branche.roles" name="roles"id="roles" required>
+                    <option [ngValue]="role" *ngFor="let role of roles">{{role}}</option>
+                </select>
+            </div> -->
+
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Adresse</label>
+                <input type="text" class="form-control" [(ngModel)]="branche.address" name="address"  id="address" required>
+            </div>
+        </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
+  </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<ng-template #password let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Changer le mot de passe</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">
+            <div class="form-group">
+                    <label class="form-control-label" for="DescriptionPiece">Ancien mot de passe</label>
+                    <input type="password" class="form-control" [(ngModel)]="branche.opassword" name="opass"  id="opass" required>
+            </div>
+            <div class="form-group">
+                    <label class="form-control-label" for="DescriptionPiece">Nouveau mot de passe</label>
+                    <input type="password" class="form-control" [(ngModel)]="branche.password" name="newpass"  id="newpass" required>
+            </div>
+            <div class="form-group">
+                    <label class="form-control-label" for="DescriptionPiece">confirmer mot de passe</label>
+                    <input type="password" class="form-control" [(ngModel)]="branche.rpassword" name="rnpass"  id="rpass" required>
+            </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Annuler</button>
+
+      <button type="button" class="btn btn-danger" (click)="save()">Valider</button>
+  </div>
+</ng-template>
+
+
+<div>
+  <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+  <div class="card">
+    <div class="card-header">
+      <span> Informations du compte </span> 
+      <span (click)="open(content,branche)" class="float-right btn btn-default float-right" style="cursor:pointer;"> <i class="fa fa-pencil" aria-hidden="true"></i></span>
+    </div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">Special title treatment</h5> -->
+     <div class="row">
+            
+                    <div class="col-md-4">
+                        <img src="assets/images/logo.png" width="100px"/>
+                    </div>
+                    <div class="col-md-6">
+                            <p></p>
+                            <p class="card-text"> Nom d'utilisateur : {{branche.username}} </p>
+                            <p class="card-text"> Email : {{branche.email}} </p>
+                            <p class="card-text"> Adresse : {{branche.address}} </p>
+                            <p class="card-text"> Rôle : {{branche.roles}}</p>
+                            <button class="btn btn-small btn-warning" (click)="open(password,branche, 'chpass')"> Changer le mot de passe</button>
+                    </div>
+            
+     </div>
+     
+    </div>
+  </div>
+
+  <div style="margin-top:50px"></div>
+
+  <!-- <div class="card">
+    <div class="card-header">
+      Informations personnel
+    </div>
+    <div class="card-body">
+      <p class="card-text"> Nom d'utilisateur</p>
+      <p class="card-text"> Email</p>
+      <p class="card-text"> Adresse</p>
+      <p class="card-text"> Rôle </p>
+      <a href="#" class="btn btn-default float-right" >Modifier</a>
+    </div>
+  </div> -->
+
+  <div style="margin-top:70px"></div>
+
+
+
+
+
+
+
+  
+</div>
