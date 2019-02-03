@@ -1,6 +1,92 @@
 <div [@routerTransition]>
-    <h2 class="text-muted">Tableau de bord <small>Statistiques</small></h2>
+    <h2 class="text-muted">Tableau de bord</h2>
+
     <div class="row">
+        <div class="col-md-12">
+            <!-- <div class="offset-md-2">
+            </div> -->
+           <div class="row">
+
+                <div class="col-md-6">
+                        <div class="card" >
+                                <div class="card-header">
+                                        Personnel
+                                </div>
+                            <ul class="list-group list-group-flush">
+                             
+                                <li class="list-group-item"> Nombre d'internes
+                                    <button class="btn btn-small btn-default"> 30 </button>
+                                </li>
+                                <li class="list-group-item">Nombre d'externes
+                                        <button class="btn btn-small btn-default"> 30 </button>
+                                </li>
+                                <li class="list-group-item">Nombres Total 
+                                        <span style="text-align:right">  <button class="btn btn-small btn-warning" > 60 </button></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                            <div class="card" >
+                                    <div class="card-header">
+                                            Appels d'offres
+                                    </div>
+                                    <img class="card-img-top" src="assets/images/stats.png" alt="Card image cap">
+                                    <div class="card-body">
+                                      <p class="card-text">
+                                          <!-- Some quick example text to build on the card title.</p> -->
+                                    </div>
+                                  </div>
+                    </div>
+           </div>
+
+
+           <div class="row">
+                <div class="col-md-6">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <i class="fa fa-bell fa-fw"></i> Notifications card
+                            </div>
+                            <!-- /.card-header -->
+                            <app-notification></app-notification>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+
+                
+                    <div class="col-md-6">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <i class="fa fa-bell fa-fw"></i> Missions en cours
+                                </div>
+                               <div class="card-body">
+                                    <a href="#" class="list-group-item clearfix d-block">
+                                            <i class="fa fa-comment fa-fw"></i>  Missions Dave
+                                            <span class="float-right text-muted small"><em>4 minutes</em></span>
+                                    </a>
+                                    <a href="#" class="list-group-item clearfix d-block">
+                                            <i class="fa fa-twitter fa-fw"></i> Missions 3 rues 
+                                            <span class="float-right text-muted small"><em>12  </em></span>
+                                    </a>
+                                    <a href="#" class="list-group-item clearfix d-block">
+                                            <i class="fa fa-comment fa-fw"></i>  Missions Dave
+                                            <span class="float-right text-muted small"><em>4 minutes</em></span>
+                                    </a>
+                                    <a href="#" class="list-group-item clearfix d-block">
+                                            <i class="fa fa-twitter fa-fw"></i> Missions 3 rues 
+                                            <span class="float-right text-muted small"><em>12  </em></span>
+                                    </a>
+
+                                    
+                               </div>
+                               <a href="#" class="btn btn-default btn-block">Voir plus</a>
+                            </div>
+                        </div>
+           </div>
+        </div>
+    </div>
+    <!-- <div class="row">
         <div class="col-md-12">
             <ngb-carousel>
                 <ng-template ngbSlide *ngFor="let slider of sliders">
@@ -12,8 +98,8 @@
                 </ng-template>
             </ngb-carousel>
         </div>
-    </div>
-    <hr>
+    </div> -->
+
     <!-- <div class="row">
         <div class="col-xl-3 col-lg-6">
             <app-stat [bgClass]="'card-primary'" [icon]="'fa-comments'" [count]="26" [label]="'New Comments!'" ></app-stat>
@@ -28,9 +114,9 @@
             <app-stat [bgClass]="'card-danger'" [icon]="'fa-support'" [count]="13" [label]="'New Tickets!'"></app-stat>
         </div>
     </div> -->
-    <hr />
+
     <!-- <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert> -->
-    <hr />
+
     <div class="row">
         <div class="col-lg-8">
             <div class="card card-default">

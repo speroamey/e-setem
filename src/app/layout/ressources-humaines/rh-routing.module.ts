@@ -13,6 +13,8 @@ const routes: Routes = [
       { path: 'outils-informatiques', loadChildren: './outils-informatiques/outils-informatiques.module#OutilsInformatiquesModule' },
       { path: 'formations', loadChildren: './formations/formations.module#FormationsModule' },
       { path: 'experiences-professionnelles', loadChildren: './experiences-professionnelles/formations.module#FormationsModule' },
+      { path: 'personnes-ressources', loadChildren: './personnes-ressources/formations.module#FormationsModule' },
+      { path: 'identites', loadChildren: './identites/formations.module#FormationsModule' },
     ]}
 ];
 

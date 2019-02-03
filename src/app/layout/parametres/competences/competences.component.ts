@@ -11,7 +11,7 @@ import { CompetencesModalService } from './modal-service'
 export class CompetencesComponent implements OnInit {
   closeResult: string;
   private competence: any;
-  private competences: any[];
+  public competences: any[];
   private current: any;
   private modalRef: any;
   private prestations: any[];

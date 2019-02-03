@@ -9,7 +9,7 @@ import {AuthService} from '../../services/AuthServices';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    private username:string;
+    public username:string;
     pushRightClass: string = 'push-right';
 
     constructor(private translate: TranslateService, public router: Router, private authService: AuthService) {

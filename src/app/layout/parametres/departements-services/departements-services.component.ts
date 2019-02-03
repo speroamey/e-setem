@@ -13,7 +13,7 @@ export class DepartementsServicesComponent implements OnInit {
 
   closeResult: string;
   private departement: any;
-  private departements: any[];
+  public departements: any[];
   private current: any;
   private modalRef: any;
   private prestations: any[];

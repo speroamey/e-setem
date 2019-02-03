@@ -13,7 +13,7 @@ import {AntennesSitesModalService} from './modal-service'
 export class AntennesSitesComponent implements OnInit {
   closeResult: string;
   private antenne_site:any;
-  private antennes_sites:any[];
+  public antennes_sites:any[];
   private current:any;
   private modalRef :any;
   private prestations:any[];

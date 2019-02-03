@@ -16,7 +16,7 @@ export class PiecesAdministrativesComponent implements OnInit {
     private date_livraison:any;
     private delais_garantie:string;
     private date_fin_garantie : any;
-    private pieces:any[];
+    public pieces:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

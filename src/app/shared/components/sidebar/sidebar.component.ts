@@ -10,6 +10,7 @@ export class SidebarComponent {
     isActive = false;
     showMenu = '';
     public role;
+    username: string;
 
     constructor( private appService: AppService){
 
@@ -26,6 +27,7 @@ export class SidebarComponent {
     }
     ngOnInit(){
         this.role=sessionStorage.getItem('roles');
+        this.username = sessionStorage.getItem('username');
     }
 
    get user_role(){

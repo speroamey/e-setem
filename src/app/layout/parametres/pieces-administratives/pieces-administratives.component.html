@@ -17,6 +17,26 @@
             </div>
 
             <div class="form-group">
+                <label class="form-control-label" for="numero">Numéro pièce</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.numero" name="numero"  id="numero" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="pays">Pays</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.pays" name="pays"  id="pays" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="lieu">Lieu de délivrance</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.lieu" name="lieu"  id="lieu" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="validite">Validité</label>
+                <input type="text" class="form-control" [(ngModel)]="piece.validite" name="validite"  id="validite" required>
+            </div>
+
+            <div class="form-group">
                 <label class="form-control-label" for="datePiece">Date d'expiration</label>
                 <div class="input-group">
                     <input type="text" class="form-control " [(ngModel)]="piece.expiration_date"

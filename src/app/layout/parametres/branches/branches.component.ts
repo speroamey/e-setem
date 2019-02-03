@@ -13,7 +13,7 @@ export class BranchesComponent implements OnInit {
 
   closeResult: string;
     private branche:any;
-    private branches:any[];
+    public branches:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

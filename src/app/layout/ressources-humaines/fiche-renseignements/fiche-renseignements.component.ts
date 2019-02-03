@@ -10,8 +10,8 @@ import { FicheRenseignementsModalService } from './modal-service'
 })
 export class FicheRenseignementsComponent implements OnInit {
   closeResult: string;
-  private identite: any;
-  private identites: any[];
+  public identite: any;
+  public identites: any[];
   private current: any;
   private modalRef: any;
   private prestations: any[];
@@ -19,10 +19,8 @@ export class FicheRenseignementsComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private pieceModalService: FicheRenseignementsModalService,
   ) {
-
-    this.identite = {};
-    this.identites = [];
-
+    this.identite=[];
+    this.identite={};
   }
 
 
@@ -48,19 +46,14 @@ export class FicheRenseignementsComponent implements OnInit {
   }
 
   
-
   open(content, pres?) {
+    alert(this.identite);
     if (pres !== undefined) {
-      let tmp = JSON.parse(JSON.stringify(pres))
-      console.log(tmp);
-      
-      tmp.birthday = this.convertDate(tmp.birthday);
-      console.log(tmp);
-      
-      this.identite = tmp;
      
+      let tmp = JSON.parse(JSON.stringify(pres))
+      this.identite = tmp;
     }
-    // console.log(this.identite)
+    // console.log(this.competence)
     this.modalRef = this.modalService.open(content)
     this.modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -68,6 +61,7 @@ export class FicheRenseignementsComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -85,8 +79,8 @@ export class FicheRenseignementsComponent implements OnInit {
         // console.log("result");
         if (result) {
           let res = result.json();
-          this.identites = res;
-          this.identite= this.identites[0];
+          this.identites.push(res);
+          // this.identite= this.identites[0];
         }
         //  return null;
       });

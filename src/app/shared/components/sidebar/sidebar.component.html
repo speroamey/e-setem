@@ -1,70 +1,88 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <div class="row">
+            <div class="col-md-12">
+                <img  style="left:45px;top: 7px; position: relative" src="assets/avatar.png" alt="cool"  width="120px" class=" " >
+            </div>
+    </div>
+  <br><br>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+           <span style="color:white; top:0;left:0;bottom: 0; right: 0; margin: auto;">
+              {{username.toUpperCase()}}
+           </span>
+        </div>
+    </div>
+    <br>
+
     <ul class="list-group">
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="/dashboard"  class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
 
-        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
-            <i class="fa fa-fw fa-user"></i>&nbsp;Utilisateurs
+
+        <div class="nested-menu"  *ngIf="user_role">
+                <a class="list-group-item" (click)="addExpandClass('pages')">
+                    <span><i class="fa fa-fw fa-wrench"></i>&nbsp; Paramètres</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'pages'">
+                    <ul class="submenu">
+                        <!-- <li [routerLink]="['/parametres/pieces-administratives']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Pièces Administratives</span></a>
+                        </li> -->
+                        <li [routerLink]="['/parametres/competences']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Compétences</span></a>
+                        </li>
+                        <li [routerLink]="['/parametres/branches']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Branches</span></a>
+                        </li>
+    
+                        <li [routerLink]="['/parametres/fonctions']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Fonctions</span></a>
+                        </li>
+                        <li [routerLink]="['/parametres/antennes-sites']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Antennenes Sites</span></a>
+                        </li>
+                        <li [routerLink]="['/parametres/departements-services']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Départements & Services</span></a>
+                        </li>
+                        <li [routerLink]="['/parametres/systemes']" [routerLinkActive]="['router-link-active']">
+                            <a href="javascript:void(0)"><span>Systèmes</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
+            
+        <a routerLink="/users" *ngIf="user_role" class="list-group-item">
+            <i class="fa fa-fw fa-user"></i>&nbsp; Personnel
         </a>
 
-        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
-            <i class="fa fa-fw fa-agenda"></i>&nbsp;Agenda
+        <a routerLink="/users"   class="list-group-item">
+            <i class="fa fa-fw fa-calendar"></i>&nbsp;Agenda#
         </a>
 
-        <a routerLink="/users" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
-            <i class="fa fa-fw fa-note"></i>&nbsp;Circ./Notes d'infos
+        <a routerLink="/users"  class="list-group-item">
+            <i class="fa fa-fw fa-info"></i>&nbsp;Notes d'infos#
         </a>
 
 
 
         
-        <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
-                <span><i class="fa fa-fw fa-wrench"></i>&nbsp; Paramètres</span>
-            </a>
-            <li class="nested" [class.expand]="showMenu === 'pages'">
-                <ul class="submenu">
-                    <li [routerLink]="['/parametres/pieces-administratives']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Pièces Administratives</span></a>
-                    </li>
-                    <li [routerLink]="['/parametres/competences']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Compétences</span></a>
-                    </li>
-                    <li [routerLink]="['/parametres/branches']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Branches</span></a>
-                    </li>
-
-                    <li [routerLink]="['/parametres/fonctions']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Fonctions</span></a>
-                    </li>
-                    <li [routerLink]="['/parametres/antennes-sites']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Antennenes Sites</span></a>
-                    </li>
-                    <li [routerLink]="['/parametres/departements-services']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Départements & Services</span></a>
-                    </li>
-                    <li [routerLink]="['/parametres/systemes']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span>Systèmes</span></a>
-                    </li>
-                </ul>
-            </li>
-        </div>
+       
 
 
 
 
-
-        <div class="nested-menu">
-            <a class="list-group-item" [routerLink]="['/ressources-humaines/fiche-renseignements']" (click)="addExpandClass('rh')">
-                <span><i class="fa fa-fw fa-file"></i>&nbsp;Renseignements</span>
+        <div class="nested-menu"  *ngIf="!user_role">
+            <a class="list-group-item" (click)="addExpandClass('rh')">
+                <span><i class="fa fa-fw fa-address-card-o"></i>&nbsp;Renseignements</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'rh'">
                 <ul class="submenu">
-                    <li [routerLink]="['/ressources-humaines/identité-unique']" [routerLinkActive]="['router-link-active']">
+                    <li [routerLink]="['/ressources-humaines/identites']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Identité unique</span></a>
                     </li>
-                    <li [routerLink]="['/ressources-humaines/pièces-administratives']" [routerLinkActive]="['router-link-active']">
+                    <li [routerLink]="['/parametres/pieces-administratives']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Pièces Administratives</span></a>
                     </li>
 
@@ -80,17 +98,15 @@
                         <a href="javascript:void(0)"><span> Affiliations </span></a>
                     </li>
 
-                    <li [routerLink]="['/ressources-humaines/publications-réalisées']" [routerLinkActive]="['router-link-active']">
+                    <!-- <li [routerLink]="['/ressources-humaines/publications-réalisées']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Publications réalisées</span></a>
-                    </li>
+                    </li> -->
 
                     <li [routerLink]="['/ressources-humaines/aptitudes']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> aptitudes</span></a>
                     </li>
 
-                    <li [routerLink]="['/ressources-humaines/langues']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span> Langues</span></a>
-                    </li>
+                   
 
                     <li [routerLink]="['/ressources-humaines/experiences-professionnelles']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Expériences Professionnelles</span></a>
@@ -99,9 +115,14 @@
                     <li [routerLink]="['/ressources-humaines/personnes-ressources']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Personnes ressources</span></a>
                     </li>
-                    <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
-                        <a href="javascript:void(0)"><span> Signatures</span></a>
+
+                    <li [routerLink]="['/ressources-humaines/langues']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Langues</span></a>
                     </li>
+
+                    <!-- <li [routerLink]="['/ressources-humaines/personnels-consultants']" [routerLinkActive]="['router-link-active']">
+                        <a href="javascript:void(0)"><span> Signatures</span></a>
+                    </li> -->
 
                     <!-- <li [routerLink]="['/ressources-humaines/documents-consultants']" [routerLinkActive]="['router-link-active']">
                         <a href="javascript:void(0)"><span> Docs. Consultants</span></a>
@@ -112,13 +133,13 @@
 
 
         <a routerLink="/ressources-humaines/documents" [routerLinkActive]="['router-link-active']" *ngIf="user_role" class="list-group-item">
-            <i class="fa fa-fw fa-user"></i>&nbsp;Documents
+            <i class="fa fa-fw fa-user"></i>&nbsp;Documents #
         </a>
 
 
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('immobiliers')">
-                <span><i class="fa fa-fw fa-file"></i>&nbsp; Immobiliers</span>
+                <span><i class="fa fa-fw fa-list-alt"></i>&nbsp; Immobiliers #</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'immobiliers'">
                 <ul class="submenu">
@@ -137,7 +158,7 @@
 
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('missions')">
-                <span><i class="fa fa-fw fa-file"></i>&nbsp; Missions</span>
+                <span><i class="fa fa-fw fa-car"></i>&nbsp; Missions#</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'missions'">
                 <ul class="submenu">

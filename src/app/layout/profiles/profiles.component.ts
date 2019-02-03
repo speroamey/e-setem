@@ -12,8 +12,8 @@ import {UsersModalService} from './modal-service'
 export class ProfilesComponent implements OnInit {
 
   closeResult: string;
-    private branche:any;
-    private branches:any[];
+    public branche:any;
+    public branches:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

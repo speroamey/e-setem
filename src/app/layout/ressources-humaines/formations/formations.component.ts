@@ -13,7 +13,7 @@ export class FormationsComponent implements OnInit {
 
   closeResult: string;
     private formation:any;
-    private formations:any[];
+    public formations:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

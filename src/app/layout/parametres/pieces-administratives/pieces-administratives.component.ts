@@ -16,7 +16,7 @@ export class PiecesAdministrativesComponent implements OnInit {
     private date_livraison:any;
     private delais_garantie:string;
     private date_fin_garantie : any;
-    private pieces:any[];
+    public pieces:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];
@@ -68,7 +68,7 @@ export class PiecesAdministrativesComponent implements OnInit {
   }
 
   private load(){
-    this.pieceModalService.load()
+    this.pieceModalService.load(sessionStorage.getItem('user_id'))
     .subscribe(result => {
             console.log("result");
             if (result) {
@@ -87,6 +87,7 @@ export class PiecesAdministrativesComponent implements OnInit {
     let month = this.piece.expiration_date.month-1;
     let year = this.piece.expiration_date.year;
     this.piece.expiration_date = new Date(year,month,day);
+    this.piece.user_id = sessionStorage.getItem('user_id');
 
 
     if (this.piece.id) {

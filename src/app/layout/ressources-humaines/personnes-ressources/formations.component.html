@@ -1,0 +1,144 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Personnes Ressources</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" #formationForm="ngForm" name="formationForm">
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="ecole">Nom </label>
+                <input type="text" class="form-control" [(ngModel)]="formation.last_name" name="last_name" id="last_name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="ecole">prenoms </label>
+                <input type="text" class="form-control" [(ngModel)]="formation.first_name" name="first_name" id="first_name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="entreprise">Entreprise</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.entreprise" name="entreprise" id="entreprise"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="Description">Fonction</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.fonctions" name="fonctions" id="fonctions"
+                    required>
+            </div>
+
+           
+
+
+            <div class="form-group">
+                <label class="form-control-label" for="contact">Contact</label>
+                <input type="text" class="form-control" [(ngModel)]="formation.contact" name="contact" id="contact"
+                    required>
+            </div>
+
+
+            <!-- <div class="form-group">
+                <label class="form-control-label" for="start_date">Date de début</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="formation.start_date" name="start_date"
+                        ngbDatepicker #d="ngbDatepicker" id="start_date" required>
+                    <button class="input-group-addon" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="end_date">Date de Fin</label>
+                <div class="input-group">
+                    <input type="text" class="form-control " [(ngModel)]="formation.end_date" name="end_date"
+                        ngbDatepicker #e="ngbDatepicker" id="end_date" required>
+                    <button class="input-group-addon" (click)="e.toggle()" type="button">
+                        <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div> -->
+
+           
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="formationForm.form.invalid">Valider</button>
+    </div>
+</ng-template>
+
+
+<!-- Template de suppression -->
+<!-- <ng-template #delete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title">Suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="ustify-content-center">Voulez vous vraiment supprimer la formation?</div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+
+      <button type="button" class="btn btn-danger" (click)="remove()">Oui</button>
+  </div>
+</ng-template> -->
+
+
+<div>
+    <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <div class="card mb-12 col-md-12">
+                <div class="card-header">Liste des Personnes Ressources </div>
+                <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                     
+                      <tbody>
+                      <tr *ngFor="let formation of formations" style="cursor:pointer;">
+                        
+                          <td>
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>{{formation.first_name.toUpperCase()}} {{formation.last_name.toUpperCase()}} </span>
+                                    <span (click)="open(content,formation)" class="float-right btn btn-default float-right"
+                                        style="cursor:pointer;">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="card-body">
+                                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fa fa-copy" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p></p>
+                                            <p class="card-text"> Nom  : {{formation.last_name}} {{formation.first_name}} </p>
+                                            <p class="card-text"> Entreprise : {{formation.entreprise }} </p>
+                                            <p class="card-text"> Fonction : {{formation.fonctions}}  </p>
+                                            <p class="card-text"> Contact : {{formation.contact }} </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>

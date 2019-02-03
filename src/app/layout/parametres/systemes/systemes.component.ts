@@ -12,7 +12,7 @@ export class SystemesComponent implements OnInit {
 
   closeResult: string;
     private systeme:any;
-    private systemes:any[];
+    public systemes:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

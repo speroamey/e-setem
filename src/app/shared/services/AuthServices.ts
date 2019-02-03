@@ -40,6 +40,7 @@ export class AuthService {
               localStorage.setItem('jhi-authenticationtoken', data.token);
               sessionStorage.setItem('jhi-authenticationtoken', data.username);
               sessionStorage.setItem('roles', data.roles);
+              sessionStorage.setItem('username', data.username);
               console.log(data);
               
               sessionStorage.setItem('user_id', data.id);

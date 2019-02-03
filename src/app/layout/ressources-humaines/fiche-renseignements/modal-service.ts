@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';;
 @Injectable()
 export class FicheRenseignementsModalService {
   public token: string;
-  private plainteUrl = HOST + '/api/rh/identity/';
+  private plainteUrl = HOST + '/api/users/';
 
    constructor( private router: Router,private http: Http) {
     //  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -21,7 +21,7 @@ export class FicheRenseignementsModalService {
      options.headers.append('Content-Type','application/json')
 
      return this.http
-       .get(`${this.plainteUrl+'list'}/${user_id}`, options)
+       .get(`${this.plainteUrl+'find'}/${user_id}`, options)
          .map((res) => {
            return res;
          })

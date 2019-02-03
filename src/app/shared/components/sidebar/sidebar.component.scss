@@ -20,6 +20,18 @@ $topnav-background-color: rgb(10, 0, 0);
          -o-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
     // border-top: 1px solid rgba(255,255,255,0.3);
+
+    .submenu li a:hover{
+        color:black !important;
+        background-color: white !important;
+        text-decoration: none
+    }
+
+    .submenu li a:active{
+        color:white !important;
+        background-color: white !important;
+        text-decoration: none
+    }
     .list-group{
         a.list-group-item {
             background: $topnav-background-color;
@@ -32,12 +44,14 @@ $topnav-background-color: rgb(10, 0, 0);
             }
         }
         a:hover {
-            background: darken($topnav-background-color, 5%);
-            color: #fff;
+            background: white;
+            color:black;
         }
         a.router-link-active {
-            background: darken($topnav-background-color, 5%);
-            color: #fff;
+            // background: darken($topnav-background-color, 5%);
+            // color: #fff;
+            background: white;
+            color:black;
         }
     }
     .sidebar-dropdown {
@@ -62,7 +76,9 @@ $topnav-background-color: rgb(10, 0, 0);
                 }
             }
             a:hover,a:focus {
-                color: #fff;
+                // color: #fff;
+                background: white;
+                color:black;
                 outline: none;
                 outline-offset: -2px;
             }
@@ -83,6 +99,7 @@ $topnav-background-color: rgb(10, 0, 0);
                     }
                     a:hover {
                         color:#FFF;
+                        text-decoration: none;
                     }
                 }
                 .list-group-item:hover {

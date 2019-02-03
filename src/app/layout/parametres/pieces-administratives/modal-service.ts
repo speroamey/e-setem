@@ -16,12 +16,12 @@ export class PiecesAdministrativesModalService {
     //  this.token = currentUser && currentUser.token;
    }
 
-   load(){
+   load(user_id){
      const options: BaseRequestOptions = createRequestOption();
      options.headers.append('Content-Type','application/json')
 
      return this.http
-       .get(this.plainteUrl+'list', options)
+       .get(`${this.plainteUrl+'list'}/${user_id}`, options)
          .map((res) => {
            return res;
          })

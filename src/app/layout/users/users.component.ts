@@ -13,11 +13,14 @@ export class UsersComponent implements OnInit {
 
   closeResult: string;
     private branche:any;
-    private branches:any[];
+    public branches:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];
     private roles:string[];
+    private sexes:string[];
+    context: any;
+    modification: boolean=false;
 
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
@@ -26,25 +29,35 @@ export class UsersComponent implements OnInit {
 
         this.branche={};
         this.roles=['ADMIN','USER'];
+        this.sexes=['Masculin','Féminin'];
     }
 
     ngOnInit() {
      this.load();
     }
 
-    open(content,pres?) {
+    open(content,pres?,context?) {
 
       if(pres !== undefined){
+        this.modification=true;
         let tmp= JSON.parse(JSON.stringify(pres))
-        
+        this.context=context;
+        if(context=="chpass"){
+          tmp.password=''
+          this.branche=tmp
+        }
         this.branche =tmp;
       }
       // console.log(this.branche)
       this.modalRef = this.modalService.open(content)
       this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
+          this.branche={};
+          this.modification=false;
       }, (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.branche={};
+          this.modification=false;
       });
     }
 
@@ -76,14 +89,25 @@ export class UsersComponent implements OnInit {
     
     if (this.branche.id) {
         //call service
-        this.pieceModalService.update(this.branche.id,this.branche)
-        .subscribe(result => {
-          console.log( this.branches);
-            let index=this.branches.findIndex((current)=>{
-              return current.id=this.branche.id;
-            })
-            this.branches[index]=this.branche
-        });
+
+        if(this.context=='chpass'){
+          this.pieceModalService.updatePass(this.branche.id,this.branche)
+          .subscribe(result => {
+            console.log( this.branche);
+              this.branche=this.branche
+          });
+        }else{
+          this.pieceModalService.update(this.branche.id,this.branche)
+          .subscribe(result => {
+            console.log( this.branches);
+              let index=this.branches.findIndex((current)=>{
+                return current.id=this.branche.id;
+              })
+              this.branches[index]=this.branche
+          });
+        }
+
+       
         this.modalRef.dismiss(true);
     } else {
       
@@ -93,6 +117,7 @@ export class UsersComponent implements OnInit {
       });
       this.modalRef.dismiss(true);
     }
+    this.modification=false;
 
   }
 

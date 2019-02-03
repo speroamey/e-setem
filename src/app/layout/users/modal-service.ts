@@ -48,6 +48,17 @@ export class UsersModalService {
           })
       }
 
+      updatePass(id,data){
+        const options: BaseRequestOptions = createRequestOption();
+        options.headers.append('Content-Type','application/json')
+        return this.http
+          .put(`${this.plainteUrl+'password'}/${id}`, data, options)
+            .map((res) => {
+              return res;
+            })
+        }
+
+
     remove(id){
       console.log(id);
       const options: BaseRequestOptions = createRequestOption();

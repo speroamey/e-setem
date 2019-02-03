@@ -13,7 +13,7 @@ export class FonctionsComponent implements OnInit {
 
   closeResult: string;
     private fonction:any;
-    private fonctions:any[];
+    public fonctions:any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];

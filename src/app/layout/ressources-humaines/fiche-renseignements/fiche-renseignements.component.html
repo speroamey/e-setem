@@ -7,6 +7,8 @@
     </div>
     <div class="modal-body">
         <form role="form" #identiteForm="ngForm" name="identiteForm">
+
+            
             <div class="form-group">
                 <label class="form-control-label" for="DescriptionPiece">Nom </label>
                 <input type="text" class="form-control" [(ngModel)]="identite.last_name" name="last_name" id="last_name"
@@ -108,9 +110,9 @@
         <div class="card-header">
             <span> Identité Unique </span>
            
-            <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                <i class="fa fa-plus" aria-hidden="true" *ngIf="identites.length <= 0 "></i>
-                <i class="fa fa-pencil" aria-hidden="true" *ngIf="identites.length >=1" ></i>
+            <span class="float-right btn btn-default float-right" style="cursor:pointer;">
+                <i class="fa fa-plus"  (click)="open(content)" aria-hidden="true" *ngIf="identites.length <= 0 "></i>
+                <i class="fa fa-pencil"  (click)="open(content,identite)" aria-hidden="true" *ngIf="identites.length >=1" ></i>
             </span>
         </div>
         <div class="card-body" *ngIf="identites.length>=1">
@@ -118,365 +120,22 @@
                 <div class="col-md-4">
                     <img src="assets/images/logo.png" width="100px"/>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngFor="let identite of identites">
                     <p></p>
-                    <!-- <p class="card-text"> Nom : {{identite.last_name}} </p>
-                    <p class="card-text"> Prénoms : {{identite.first_name}} </p>
+                    <p class="card-text"> Nom & Prénoms: {{identite.last_name.toUpperCase()}} <span>   {{identite.first_name}}</span> </p>
                     <p class="card-text"> Date de naissance : {{identite.birthday | date:yMdjm}} </p>
                     <p class="card-text"> Sexe : {{identite.sexe}}</p>
-                    <p class="card-text"> Email : {{identite.email}} </p>
-                    <p class="card-text"> Titre : {{identite.titre}} </p>
-                    <p class="card-text"> Tél : {{identite.phone}} </p>
-                    <p class="card-text"> Adresse : {{identite.address}} </p> -->
+                    <p class="card-text"> Titre : {{identite.titre}} <span>Email : {{identite.email}}</span>  </p>
+                    <p class="card-text"> Adresse : {{identite.address}} <span> Tél : {{identite.phone}}</span> </p>
                 </div>
-
+                <p></p>
             </div>
 
         </div>
     </div>
 
-    <div style="margin-top:50px"></div>
 
-    <!-- formations -->
-    <div class="card">
-            <div class="card-header">
-                <span> Formations </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-    
-
-    <div style="margin-top:70px"></div>
-
-
-    <!-- Outils Informatiques -->
-    <div class="card">
-            <div class="card-header">
-                <span> Outils Informatique </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    
-    
-    </div>
-    
-
-
-    <div style="margin-top:70px"></div>
-
-    <!-- Affiliations -->
-    <div class="card">
-            <div class="card-header">
-                <span> Affiliations </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-    
-
-    <!-- Publication réalisées -->
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Publication réalisées </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-
-    <!-- Aptitudes -->
-
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Aptitudes </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-
-    <!-- Experience Pro -->
-
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Expériences Professionnelles </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-
-
-
-
-    <!-- Langues -->
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Langues </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-    <!-- Personnes ressources -->
-
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Personnes ressources </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-
-    <!-- Pièces administratives -->
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Pièces Administratives </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
-
-
-    <!-- Signature -->
-    <div style="margin-top:70px"></div>
-
-    <div class="card">
-            <div class="card-header">
-                <span> Signature </span>
-                <span (click)="open(content,identite)" class="float-right btn btn-default float-right" style="cursor:pointer;">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></span>
-            </div>
-            <div class="card-body" *ngIf="identite.lenght>1">
-                <!-- <h5 class="card-title">Special title treatment</h5> -->
-                <div class="row">
-    
-                    <div class="col-md-4">
-                        <img src="assets/images/logo.png" width="100px" />
-                    </div>
-                    <div class="col-md-6">
-                        <p></p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.last_name}} </p>
-                        <p class="card-text"> Nom d'utilisateur : {{identite.first_name}} </p>
-                        <p class="card-text"> Email : {{identite.email}} </p>
-                        <p class="card-text"> Adresse : {{identite.address}} </p>
-                        <p class="card-text"> Rôle : {{identite.roles}}</p>
-                        <button class="btn btn-small btn-warning" (click)="open(password,identite, 'chpass')"> Changer le
-                            mot de passe</button>
-                    </div>
-    
-                </div>
-    
-            </div>
-    </div>
+   
 
 
 

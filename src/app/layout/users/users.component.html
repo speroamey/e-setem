@@ -2,29 +2,50 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-      <h4 class="modal-title">Utilisateurs</h4>
+      <h4 class="modal-title">Personnel</h4>
       <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>
   </div>
   <div class="modal-body">
           <form role="form" #brancheForm="ngForm" name="brancheForm">
+
             <div class="form-group">
-              <label class="form-control-label" for="DescriptionPiece">Nom utilisateur</label>
-              <input type="text" class="form-control" [(ngModel)]="branche.username" name="libelle"  id="libelle" required>
+                <label class="form-control-label" for="titre">Type de collaborateur 
+                </label>
+                <div class="form-group">
+                        <input type="radio" name="options" [(ngModel)]="branche.type" value="interne">
+                        Interne
+                        <input type="radio" name="options" [(ngModel)]="branche.type" value="Externe" style="margin-left:20px"> 
+                        Externe
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="DescriptionPiece">Nom </label>
+                 <input type="text" class="form-control" [(ngModel)]="branche.last_name" name="last_name"  id="last_name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="DescriptionPiece">Prénoms</label>
+              <input type="text" class="form-control" [(ngModel)]="branche.first_name" name="first_name"  id="first_name" required>
             </div>
             
             <div class="form-group">
-                <label class="form-control-label" for="DescriptionPiece">Email</label>
-                <input type="text" class="form-control" [(ngModel)]="branche.email" name="email"  id="email" required>
+                <label class="form-control-label" for="username">Nom d'utilisaeur</label>
+                <input type="text" class="form-control" [(ngModel)]="branche.username" name="username"  id="username" required>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group" *ngIf=" !modification">
                 <label class="form-control-label" for="DescriptionPiece">Mot de passe</label>
                 <input type="password" class="form-control" [(ngModel)]="branche.password" name="pass"  id="pass" required>
-            </div>
+            </div> -->
 
  
+            <div class="form-group">
+                    <label class="form-control-label" for="IdPrestation">Sexe</label>
+                    <select class="form-control" [(ngModel)]="branche.sexe" name="sexes"id="sexes" required>
+                        <option [ngValue]="sexe" *ngFor="let sexe of sexes">{{sexe}}</option>
+                    </select>
+            </div>
 
             <div class="form-group">
                 <label class="form-control-label" for="IdPrestation">Rôles utilisateur</label>
@@ -33,10 +54,10 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-control-label" for="DescriptionPiece">Adresse</label>
                 <input type="text" class="form-control" [(ngModel)]="branche.address" name="address"  id="address" required>
-            </div>
+            </div> -->
         </form>
   </div>
   <div class="modal-footer">
@@ -78,8 +99,9 @@
                       <tr>
                           <th>ID</th>
                           <th>Noms Utilisateurs</th>
-                          <th>Email</th>
-                          <th>Adresse</th>
+                          <th>Nom & Prenoms</th>
+                          <th>Type collaborateur</th>
+                          <th>Genre</th>
                           <th>Actions</th>
                       </tr>
                       </thead>
@@ -88,8 +110,9 @@
                         
                           <td >{{branche.id}}</td>
                           <td>{{branche.username}}</td>
-                          <td>{{branche.email}}</td>
-                          <td>{{branche.address}}</td>
+                          <td>{{branche.last_name}} {{branche.first_name}}</td>
+                          <td>{{branche.type}}</td>
+                          <td>{{branche.sexe}}</td>
                         
                           <!-- <td>{{branche.expiration_date | date:yMdjm}}</td> -->
 
