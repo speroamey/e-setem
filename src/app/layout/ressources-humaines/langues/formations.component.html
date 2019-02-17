@@ -1,0 +1,91 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Langues</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" #formationForm="ngForm" name="formationForm">
+            <div class="form-group">
+                <label class="form-control-label" for="langue">Langue</label>
+                    <select class="form-control" [(ngModel)]="formation.langue" name="langues"id="langues" required>
+                        <option [ngValue]="langue" *ngFor="let langue of langues">{{langue}}</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="lecture">Lue</label>
+                    <select class="form-control" [(ngModel)]="formation.lecture" name="lectures"id="lectures" required>
+                        <option [ngValue]="lecture" *ngFor="let lecture of levels">{{lecture}}</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="parle">Parlée</label>
+                    <select class="form-control" [(ngModel)]="formation.parle" name="parles"id="parles" required>
+                        <option [ngValue]="parle" *ngFor="let parle of levels">{{parle}}</option>
+                    </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="ecriture">Ecrite</label>
+                    <select class="form-control" [(ngModel)]="formation.ecriture" name="ecrits"id="ecrits" required>
+                        <option [ngValue]="ecrit" *ngFor="let ecrit of levels">{{ecrit}}</option>
+                    </select>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="formationForm.form.invalid">Valider</button>
+    </div>
+</ng-template>
+
+
+
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <div class="card mb-12 col-md-12">
+                <div class="card-header">Liste des langues</div>
+                <div class="card-block table-responsive">
+                  <table class="table table-hover table-striped">
+                      <tbody>
+                      <tr *ngFor="let formation of formations" style="cursor:pointer;">
+                          <td>
+                            <div class="card">
+                                <div class="card-header">
+                                    <span> {{formation.langue.toUpperCase()}} </span>
+                                    <span (click)="open(content,formation)" class="float-right btn btn-default float-right"
+                                        style="cursor:pointer;">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                </div>
+                                <div class="card-body">
+                                    <!-- <h5 class="card-title">Special title treatment</h5> -->
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <i class="fa fa-university" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p></p>
+                                            <p class="card-text"> Lu : {{formation.lecture}} </p>
+                                            <p class="card-text"> Parlée : {{formation.parle}} </p>
+                                            <p class="card-text"> Ecrite : {{formation.ecriture}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>

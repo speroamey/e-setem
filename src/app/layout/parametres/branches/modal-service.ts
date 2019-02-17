@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Rx';;
 export class BranchesModalService {
   public token: string;
   private plainteUrl = HOST + '/api/parametres/branches/';
+  private competenceUrl = HOST + '/api/parametres/competences/';
 
    constructor( private router: Router,private http: Http) {
     //  var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -26,6 +27,19 @@ export class BranchesModalService {
            return res;
          })
      }
+
+     loadCompetence(){
+      const options: BaseRequestOptions = createRequestOption();
+      options.headers.append('Content-Type','application/json')
+ 
+      return this.http
+        .get(this.competenceUrl+'list', options)
+          .map((res) => {
+            return res;
+          })
+      }
+
+
 
   add(data){
     const options: BaseRequestOptions = createRequestOption();

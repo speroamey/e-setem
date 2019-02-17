@@ -20,9 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         FormationsRoutingModule,
         PageHeaderModule,
         FormsModule,
-        
         NgbModule.forRoot()
     ],
+    exports:[FormationsComponent],
     declarations: [FormationsComponent],
     providers: [FormationsModalService,NgbActiveModal,DatePipe],
 

@@ -8,9 +8,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+
+
 import { AuthGuard, CustExtBrowserXhr } from './shared';
 import {AuthService,AUTH_PROVIDERS,LoggedInGuard} from './shared'
 import { AppService} from './app.service';
+
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -27,6 +33,8 @@ export function HttpLoaderFactory(http: Http) {
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
+        CommonModule,
+        ToastrModule.forRoot(),
         JsonpModule,
         AppRoutingModule,
         TranslateModule.forRoot({

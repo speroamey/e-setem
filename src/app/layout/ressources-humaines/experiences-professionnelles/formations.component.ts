@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormationsModalService} from './modal-service'
+import {ExperiencessModalService} from './modal-service'
 
 @Component({
-  selector: 'app-formations',
+  selector: 'app-experiences',
   templateUrl: './formations.component.html',
   styleUrls: ['./formations.component.css'],
   animations: [routerTransition()]
 })
-export class FormationsComponent implements OnInit {
+export class ExperiencesComponent implements OnInit {
 
   closeResult: string;
     private formation:any;
@@ -17,16 +17,23 @@ export class FormationsComponent implements OnInit {
     private current:any;
     private modalRef :any;
     private prestations:any[];
+    @Input() user_id: any;
+
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
-                 private pieceModalService:FormationsModalService,
+                 private pieceModalService:ExperiencessModalService,
                  ) {
 
         this.formation={};
     }
 
     ngOnInit() {
-     this.load();
+    
+     if(this.user_id){
+      this.load(this.user_id);
+    }else{
+      this.load(sessionStorage.getItem('user_id'));
+    }
     }
 
 
@@ -74,8 +81,8 @@ export class FormationsComponent implements OnInit {
       }
   }
 
-  private load(){
-    this.pieceModalService.load(sessionStorage.getItem('user_id'))
+  private load(id){
+    this.pieceModalService.load(id)
     .subscribe(result => {
             // console.log("result");
             if (result) {
@@ -96,11 +103,14 @@ export class FormationsComponent implements OnInit {
     return dat;
   }
 
-  save(){
-   console.log(this.formation.start_date);
-   
-   
-    this.formation.user_id = sessionStorage.getItem('user_id');
+  save(){   
+    
+    if (this.user_id) {
+      this.formation.user_id = this.user_id;
+    } else {  
+      this.formation.user_id = sessionStorage.getItem('user_id');
+    }
+  
     this.formation.start_date = this.extractDay(this.formation.start_date);
     this.formation.end_date = this.extractDay(this.formation.end_date);
     console.log(this.formation.start_date);

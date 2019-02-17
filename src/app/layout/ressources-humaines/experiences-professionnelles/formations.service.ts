@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { FormationsComponent } from './formations.component';
+import { ExperiencesComponent } from './formations.component';
 import { BranchesComponentModel } from './formations.model.component';
 
 

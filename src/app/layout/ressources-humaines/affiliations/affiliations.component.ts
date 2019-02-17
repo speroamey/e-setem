@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BranchesModalService} from './modal-service'
 
 @Component({
-  selector: 'app-branches',
+  selector: 'app-affiliation',
   templateUrl: './affiliations.component.html',
   styleUrls: ['./affiliations.component.css'],
   animations: [routerTransition()]
@@ -17,6 +17,8 @@ export class AffiliationsComponent implements OnInit {
     private current:any;
     private modalRef :any;
     private prestations:any[];
+    @Input() user_id: any;
+
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:BranchesModalService,
@@ -26,7 +28,11 @@ export class AffiliationsComponent implements OnInit {
     }
 
     ngOnInit() {
-     this.load();
+     if(this.user_id){
+       this.load(this.user_id);
+     }else{
+       this.load(sessionStorage.getItem('user_id'));
+     }
     }
 
     public convertDate(arg){
@@ -71,8 +77,8 @@ export class AffiliationsComponent implements OnInit {
       }
   }
 
-  private load(){
-    this.pieceModalService.load(sessionStorage.getItem('user_id'))
+  private load(id){
+    this.pieceModalService.load(id)
     .subscribe(result => {
             // console.log("result");
             if (result) {
@@ -94,7 +100,12 @@ export class AffiliationsComponent implements OnInit {
 
   save(){
     
-    this.branche.user_id = sessionStorage.getItem('user_id');
+    // this.branche.user_id = sessionStorage.getItem('user_id');
+    if (this.user_id) {
+      this.branche.user_id = this.user_id;
+    } else {  
+      this.branche.user_id = sessionStorage.getItem('user_id');
+    }
     this.branche.start_date = this.extractDay(this.branche.start_date);
     this.branche.end_date = this.extractDay(this.branche.end_date);
     

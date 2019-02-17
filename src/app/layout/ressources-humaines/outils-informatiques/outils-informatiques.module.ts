@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
 import { OutilsInformatiquesRoutingModule } from './outils-informatiques-routing.module';
 import { OutilsInformatiquesComponent } from './outils-informatiques.component';
 import { PageHeaderModule } from '../../../shared';
-import {BranchesModalService} from './modal-service';
+import {OutilsInformatiqueModalService} from './modal-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,8 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         
         NgbModule.forRoot()
     ],
+    exports:[OutilsInformatiquesComponent],
     declarations: [OutilsInformatiquesComponent],
-    providers: [BranchesModalService,NgbActiveModal,DatePipe],
+    providers: [OutilsInformatiqueModalService,NgbActiveModal,DatePipe],
 
 })
 export class OutilsInformatiquesModule { }

@@ -12,9 +12,11 @@ const routes: Routes = [
       { path: 'affiliations', loadChildren: './affiliations/affiliations.module#AffiliationsModule' },
       { path: 'outils-informatiques', loadChildren: './outils-informatiques/outils-informatiques.module#OutilsInformatiquesModule' },
       { path: 'formations', loadChildren: './formations/formations.module#FormationsModule' },
-      { path: 'experiences-professionnelles', loadChildren: './experiences-professionnelles/formations.module#FormationsModule' },
-      { path: 'personnes-ressources', loadChildren: './personnes-ressources/formations.module#FormationsModule' },
-      { path: 'identites', loadChildren: './identites/formations.module#FormationsModule' },
+      { path: 'experiences-professionnelles', loadChildren: './experiences-professionnelles/formations.module#ExperiencesProfessionnellesModule' },
+      { path: 'personnes-ressources', loadChildren: './personnes-ressources/formations.module#PersonnesRessourcesModule' },
+      { path: 'identites', loadChildren: './identites/formations.module#IdentitesModule'},
+      { path: 'langues', loadChildren: './langues/formations.module#LanguesModule'},
+      { path: 'aptitudes', loadChildren: './aptitudes/formations.module#AptitudesModule'},
     ]}
 ];
 

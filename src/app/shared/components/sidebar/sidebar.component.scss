@@ -1,4 +1,15 @@
-$topnav-background-color: rgb(10, 0, 0);
+$topnav-background-color: rgb(255, 255, 255);
+a span.chip{
+    width: 100%;
+    text-align: left;
+    padding-left:20px !important;
+    background-color:cornsilk !important; 
+    -webkit-box-pack:initial;
+    display: -webkit-inline-box;
+}
+// span.chip i{
+//     margin-left: -69px;
+// }
 .sidebar{
     border-radius: 0;
     position: fixed;
@@ -23,13 +34,13 @@ $topnav-background-color: rgb(10, 0, 0);
 
     .submenu li a:hover{
         color:black !important;
-        background-color: white !important;
+        background-color: #e0e0e0 !important;
         text-decoration: none
     }
 
     .submenu li a:active{
-        color:white !important;
-        background-color: white !important;
+        color:inherit !important;
+        background-color: #e0e0e0 !important;
         text-decoration: none
     }
     .list-group{
@@ -44,16 +55,27 @@ $topnav-background-color: rgb(10, 0, 0);
             }
         }
         a:hover {
-            background: white;
+            // background: white;
+            background-color: #e0e0e0;
             color:black;
         }
-        a.router-link-active {
-            // background: darken($topnav-background-color, 5%);
-            // color: #fff;
-            background: white;
-            color:black;
-        }
+        // a.router-link-active {
+        //     // background: darken($topnav-background-color, 5%);
+        //     // color: #fff;
+        //     background: rgb(245, 237, 237);
+        //     color:black;
+        // }
     }
+    .router-link-active{
+        background-color:#e0e0e0;
+        
+    }
+
+    .router-link-active a span{
+        color:black !important;
+      
+    }
+
     .sidebar-dropdown {
         *:focus {
             border-radius: none;
@@ -87,7 +109,7 @@ $topnav-background-color: rgb(10, 0, 0);
             background: darken($topnav-background-color, 5%);
         }
         .panel-collapse {
-            border-radious :0;
+            border-radius :0;
             border : none;
             .panel-body {
                 .list-group-item {
@@ -120,6 +142,9 @@ $topnav-background-color: rgb(10, 0, 0);
         display: none;
         height: 0;
     }
+    ul li{ 
+        margin-left: 20px;
+    }
     & .expand {
         ul.submenu {
             display: block;
@@ -127,7 +152,7 @@ $topnav-background-color: rgb(10, 0, 0);
             height: auto;
             li {
                 a {
-                    color: #FFF;
+                    color: black;
                     padding: 10px;
                     display: block;
                 }

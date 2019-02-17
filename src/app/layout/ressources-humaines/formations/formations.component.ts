@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {FormationsModalService} from './modal-service'
@@ -17,16 +17,25 @@ export class FormationsComponent implements OnInit {
     private current:any;
     private modalRef :any;
     private prestations:any[];
+    @Input() user_id: any;
+    diplomes: any[];
+
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:FormationsModalService,
                  ) {
 
         this.formation={};
+        this.diplomes=['CEP','BEPC','CAP','BAC','BAC+1','BAC+2','BAC+3','BAC+4','BAC+5','BAC+6','BAC+7','BAC+8','BAC+9 et Plus',"Je n'ai pas de diplome"];
     }
 
     ngOnInit() {
-     this.load();
+
+     if(this.user_id){
+      this.load(this.user_id);
+    }else{
+      this.load(sessionStorage.getItem('user_id'));
+    }
     }
 
 
@@ -74,8 +83,8 @@ export class FormationsComponent implements OnInit {
       }
   }
 
-  private load(){
-    this.pieceModalService.load(sessionStorage.getItem('user_id'))
+  private load(id){
+    this.pieceModalService.load(id)
     .subscribe(result => {
             // console.log("result");
             if (result) {
@@ -100,7 +109,13 @@ export class FormationsComponent implements OnInit {
    console.log(this.formation.start_date);
    
    
-    this.formation.user_id = sessionStorage.getItem('user_id');
+    // this.formation.user_id = sessionStorage.getItem('user_id');
+    if (this.user_id) {
+      this.formation.user_id = this.user_id;
+    } else {
+      this.formation.user_id = sessionStorage.getItem('user_id');
+    }
+
     this.formation.start_date = this.extractDay(this.formation.start_date);
     this.formation.end_date = this.extractDay(this.formation.end_date);
     console.log(this.formation.start_date);

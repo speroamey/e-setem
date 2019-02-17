@@ -10,19 +10,11 @@ const httpOptions = {
 
 @Injectable()
 export class AppService {
-  public _roles:any;
-  public _userId;
+  public _roles: any;
+  public _user_id;
+  public _user_name;
+
   constructor() {
 
   }
-
-
-
-
-
-
-
-
-
-
 }

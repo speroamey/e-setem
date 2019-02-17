@@ -7,7 +7,7 @@ import { Http, Response, URLSearchParams,BaseRequestOptions } from '@angular/htt
 import { Observable } from 'rxjs/Rx';;
 
 @Injectable()
-export class FormationsModalService {
+export class IdentitesModalService {
   public token: string;
   private plainteUrl = HOST + '/api/users/';
 

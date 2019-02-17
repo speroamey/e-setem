@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import {AuthService} from '../shared/services/AuthServices';
 import { AppService } from 'app/app.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     message: string;
     private data:any;
     private loading = false;
-    constructor(public router: Router, private authService: AuthService, appService: AppService) {
+    constructor(public router: Router, private authService: AuthService, appService: AppService, private toastr: ToastrService) {
         this.credentials = {};
     }
 
@@ -33,8 +33,10 @@ export class LoginComponent implements OnInit {
       this.credentials.password=this.password;
       if (this.credentials) {
         this.authService.login(this.credentials)
-        .subscribe(result => {
+            .subscribe(result => {
                 if (result === true) {
+                    console.log(result);
+                    this.toastr.success('Succès!', 'Connexion réussie!');
                     this.data=result;
                     this.router.navigate(['/']);
                 } else {

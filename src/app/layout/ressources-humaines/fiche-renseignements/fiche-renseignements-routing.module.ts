@@ -6,7 +6,7 @@ import { FicheRenseignementsComponent } from './fiche-renseignements.component';
 
 const routes: Routes = [
   
-    { path: '', component: FicheRenseignementsComponent }
+    { path: ':id', component: FicheRenseignementsComponent }
 ];
 
 @NgModule({

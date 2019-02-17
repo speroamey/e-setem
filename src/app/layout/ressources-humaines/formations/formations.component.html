@@ -10,18 +10,22 @@
 
 
             <div class="form-group">
-                <label class="form-control-label" for="ecole">Ecole</label>
+                <label class="form-control-label" for="ecole">Ecole / Institue</label>
                 <input type="text" class="form-control" [(ngModel)]="formation.ecole" name="ecole" id="ecole" required>
             </div>
 
             <div class="form-group">
                 <label class="form-control-label" for="Description">Diplôme</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.diplome" name="diplome" id="diplome"
-                    required>
+                <!-- <input type="text" class="form-control" [(ngModel)]="formation.diplome" name="diplome" id="diplome"
+                    required> -->
+
+                    <select class="form-control" [(ngModel)]="formation.diplome" name="diplomes"id="diplomes" required>
+                        <option [ngValue]="diplome" *ngFor="let diplome of diplomes">{{diplome}}</option>
+                    </select>
             </div>
 
             <div class="form-group">
-                <label class="form-control-label" for="domaine">Domaine</label>
+                <label class="form-control-label" for="domaine">Spécialité</label>
                 <input type="text" class="form-control" [(ngModel)]="formation.domaine" name="domaine" id="domaine"
                     required>
             </div>

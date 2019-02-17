@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         
         NgbModule.forRoot()
     ],
+    exports: [AffiliationsComponent],
     declarations: [AffiliationsComponent],
     providers: [BranchesModalService,NgbActiveModal,DatePipe],
 

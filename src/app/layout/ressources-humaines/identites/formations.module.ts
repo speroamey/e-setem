@@ -8,9 +8,9 @@ import { DatePipe } from '@angular/common';
 // import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormationsRoutingModule } from './formations-routing.module';
-import { FormationsComponent } from './formations.component';
+import { IdentitesComponent } from './formations.component';
 import { PageHeaderModule } from '../../../shared';
-import {FormationsModalService} from './modal-service';
+import {IdentitesModalService} from './modal-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,8 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         
         NgbModule.forRoot()
     ],
-    declarations: [FormationsComponent],
-    providers: [FormationsModalService,NgbActiveModal,DatePipe],
+    exports:[IdentitesComponent],
+    declarations: [IdentitesComponent],
+    providers: [IdentitesModalService,NgbActiveModal,DatePipe],
 
 })
-export class FormationsModule { }
+export class IdentitesModule { }

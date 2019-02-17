@@ -1,6 +1,7 @@
 import { URLSearchParams, BaseRequestOptions } from '@angular/http';
-export let HOST: string =  'http://setem.waouhmonde.com';
-// 'http://setem.waouhmonde.com';
+export let HOST: string =  'http://127.0.0.1:8080';
+// 'http://e-setem.bj';
+// 'http://127.0.0.1';
 
 export const createRequestOption = (req?: any,accept:boolean=false): BaseRequestOptions => {
   const options: BaseRequestOptions = new BaseRequestOptions();
@@ -23,10 +24,8 @@ export const createRequestOption = (req?: any,accept:boolean=false): BaseRequest
     options.headers.append('Accept', '*/*');
 
     options.headers.append(
-       'Access-Control-Allow-Headers',
-       'X-Total-Count,Access-Control-*, Link,X-Requested-With, Content-Type, Accept, Origin, Authorization'
-     );
-     options.headers.append('Access-Control-Allow-Origin',  'http://setem.waouhmonde.com');
+       'Access-Control-Allow-Headers','*');
+     options.headers.append('Access-Control-Allow-Origin',  '*');
      options.headers.append('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT');
     //  options.headers.append('Content-Type', 'application/json');
   if (token) {

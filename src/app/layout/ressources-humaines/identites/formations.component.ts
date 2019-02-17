@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormationsModalService} from './modal-service'
+import {IdentitesModalService} from './modal-service'
 
 @Component({
-  selector: 'app-formations',
+  selector: 'app-identites',
   templateUrl: './formations.component.html',
   styleUrls: ['./formations.component.css'],
   animations: [routerTransition()]
 })
-export class FormationsComponent implements OnInit {
+export class IdentitesComponent implements OnInit {
 
   closeResult: string;
     private formation:any;
@@ -17,13 +17,15 @@ export class FormationsComponent implements OnInit {
     private current:any;
     private modalRef :any;
     private prestations:any[];
+    @Input() user_id: any;
+
   roles: string[];
   sexes: string[];
   categories: string[];
   anciennetes: string[];
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
-                 private pieceModalService:FormationsModalService,
+                 private pieceModalService:IdentitesModalService,
                  ) {
         this.formations=[];
         this.formation={};
@@ -34,7 +36,13 @@ export class FormationsComponent implements OnInit {
     }
 
     ngOnInit() {
-     this.load();
+    
+      if(this.user_id){
+        this.load(this.user_id);
+      }else{
+        this.load(sessionStorage.getItem('user_id'));
+      }
+    
     }
 
 
@@ -57,10 +65,8 @@ export class FormationsComponent implements OnInit {
       if(pres !== undefined){
         let tmp= JSON.parse(JSON.stringify(pres))
         tmp.birthday = this.convertDate(tmp.birthday);
-      
-
         this.formation =tmp;
-        console.log(this.formation );
+
         
       }
       // console.log(this.formation)
@@ -82,8 +88,8 @@ export class FormationsComponent implements OnInit {
       }
   }
 
-  private load(){
-    this.pieceModalService.load(sessionStorage.getItem('user_id'))
+  private load(id){
+    this.pieceModalService.load(id)
     .subscribe(result => {
             // console.log("result");
             if (result) {
@@ -105,12 +111,15 @@ export class FormationsComponent implements OnInit {
   }
 
   save(){
-   console.log(this.formation);
    
-   
-    this.formation.user_id = sessionStorage.getItem('user_id');
+    // this.formation.user_id = sessionStorage.getItem('user_id');
+    if (this.user_id) {
+      this.formation.user_id = this.user_id;
+    } else {
+      this.formation.user_id = sessionStorage.getItem('user_id');
+    }
     this.formation.birthday = this.extractDay(this.formation.birthday);
-    console.log(this.formation);
+  
     
     
     if (this.formation.id) {

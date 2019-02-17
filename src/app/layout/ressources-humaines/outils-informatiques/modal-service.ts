@@ -7,7 +7,7 @@ import { Http, Response, URLSearchParams,BaseRequestOptions } from '@angular/htt
 import { Observable } from 'rxjs/Rx';;
 
 @Injectable()
-export class BranchesModalService {
+export class OutilsInformatiqueModalService {
   public token: string;
   private plainteUrl = HOST + '/api/rh/outils-informatiques/';
 

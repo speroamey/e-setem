@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FicheRenseignementsModalService } from './modal-service'
+import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-fiche-renseignements',
@@ -15,9 +17,12 @@ export class FicheRenseignementsComponent implements OnInit {
   private current: any;
   private modalRef: any;
   private prestations: any[];
+  private _subscription: Subscription;
+  public userId:any;
   constructor(private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private pieceModalService: FicheRenseignementsModalService,
+    private _activatedRoute: ActivatedRoute,
   ) {
     this.identite=[];
     this.identite={};
@@ -26,7 +31,12 @@ export class FicheRenseignementsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.load();
+    
+    this._subscription = this._activatedRoute.params.subscribe((params: any[]) => {
+      this.userId= parseInt(params['id']);
+      // this.loadDetails(this.prestationId)
+      this.load();
+   });
   }
 
 
@@ -79,8 +89,8 @@ export class FicheRenseignementsComponent implements OnInit {
         // console.log("result");
         if (result) {
           let res = result.json();
-          this.identites.push(res);
-          // this.identite= this.identites[0];
+        
+          this.identite= this.identites;
         }
         //  return null;
       });

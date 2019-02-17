@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {UsersModalService} from './modal-service'
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-branches',
@@ -19,13 +20,20 @@ export class UsersComponent implements OnInit {
     private prestations:any[];
     private roles:string[];
     private sexes:string[];
+    pushRightClass: string = 'push-right';
     context: any;
     modification: boolean=false;
 
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:UsersModalService,
+                 public router: Router,
                  ) {
+        this.router.events.subscribe((val) => {
+          if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
+              this.toggleSidebar();
+           }
+        });
 
         this.branche={};
         this.roles=['ADMIN','USER'];
@@ -35,6 +43,16 @@ export class UsersComponent implements OnInit {
     ngOnInit() {
      this.load();
     }
+
+    isToggled(): boolean {
+      const dom: Element = document.querySelector('body');
+      return dom.classList.contains(this.pushRightClass);
+   }
+
+    toggleSidebar() {
+      const dom: any = document.querySelector('body');
+      dom.classList.toggle(this.pushRightClass);
+  }
 
     open(content,pres?,context?) {
 

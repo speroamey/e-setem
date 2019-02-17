@@ -14,6 +14,7 @@ export class BranchesComponent implements OnInit {
   closeResult: string;
     private branche:any;
     public branches:any[];
+    public competences: any[];
     private current:any;
     private modalRef :any;
     private prestations:any[];
@@ -27,6 +28,7 @@ export class BranchesComponent implements OnInit {
 
     ngOnInit() {
      this.load();
+     this.loadCompetence();
     }
 
     open(content,pres?) {
@@ -64,6 +66,18 @@ export class BranchesComponent implements OnInit {
               this.branches = res;
             }
             //  return null;
+    });
+  }
+
+
+
+  private loadCompetence(){
+    this.pieceModalService.loadCompetence()
+    .subscribe(result => {
+            if (result) {
+              let res = result.json();
+              this.competences = res;
+            }
     });
   }
 

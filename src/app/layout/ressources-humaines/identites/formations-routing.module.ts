@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FormationsComponent } from './formations.component';
+import { IdentitesComponent } from './formations.component';
 
 
 const routes: Routes = [
   
-    { path: '', component: FormationsComponent }
+    { path: '', component: IdentitesComponent }
 ];
 
 @NgModule({
