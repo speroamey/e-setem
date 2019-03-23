@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BranchesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fonctions',
@@ -20,6 +21,7 @@ export class FonctionsComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:BranchesModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.fonction={};
@@ -34,6 +36,8 @@ export class FonctionsComponent implements OnInit {
       if(pres !== undefined){
         let tmp= JSON.parse(JSON.stringify(pres))
         this.fonction =tmp;
+      }else{
+        this.fonction={};
       }
       // console.log(this.fonction)
       this.modalRef = this.modalService.open(content)
@@ -68,23 +72,30 @@ export class FonctionsComponent implements OnInit {
   }
 
   save(){
-   
-    
     if (this.fonction.id) {
         //call service
         this.pieceModalService.update(this.fonction.id,this.fonction)
         .subscribe(result => {
           console.log( this.fonctions);
-            let index=this.fonctions.findIndex((current)=>{
-              return current.id=this.fonction.id;
-            })
-            this.fonctions[index]=this.fonction
+            // let index=this.fonctions.findIndex((current)=>{
+            //   return current.id=this.fonction.id;
+            // })
+            // this.fonctions[index]=this.fonction
+            for (let index = 0; index < this.fonctions.length; index++) {
+              if (this.fonction.id==this.fonctions[index].id) {
+                this.fonctions[index] = this.fonction;
+                break;
+              }
+            }
         });
         this.modalRef.dismiss(true);
     } else {
       this.pieceModalService.add(this.fonction)
       .subscribe(result => {
           this.fonctions.push(result.json());
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       this.modalRef.dismiss(true);
     }

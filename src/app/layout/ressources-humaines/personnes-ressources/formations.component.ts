@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PersonnesRessourcesModalService } from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-personnes-ressources',
@@ -10,7 +11,6 @@ import { PersonnesRessourcesModalService } from './modal-service'
   animations: [routerTransition()]
 })
 export class PersonnesRessourcesComponent implements OnInit {
-
   closeResult: string;
   private formation: any;
   public formations: any[];
@@ -22,6 +22,7 @@ export class PersonnesRessourcesComponent implements OnInit {
   constructor(private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private pieceModalService: PersonnesRessourcesModalService,
+    private toastr: ToastrService
   ) {
 
     this.formation = {};
@@ -103,7 +104,6 @@ export class PersonnesRessourcesComponent implements OnInit {
   // }
 
   save() {
-
     // this.formation.user_id = sessionStorage.getItem('user_id');
     if (this.user_id) {
       this.formation.user_id = this.user_id;
@@ -116,7 +116,6 @@ export class PersonnesRessourcesComponent implements OnInit {
 
 
     if (this.formation.id) {
-
       //call service
       this.pieceModalService.update(this.formation.id, this.formation)
         .subscribe(result => {
@@ -132,6 +131,9 @@ export class PersonnesRessourcesComponent implements OnInit {
       this.pieceModalService.add(this.formation)
         .subscribe(result => {
           this.formations.push(result.json());
+        },
+        error=>{
+          this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
         });
       // this.formation={};
       this.modalRef.dismiss(true);

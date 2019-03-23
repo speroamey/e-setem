@@ -49,12 +49,12 @@ $app->group("/api", function() use ($app){
                                 ->withJson($OutilsInformatiques );
             });
                 
-            // $app->delete("/delete/{id}", function(Request $request, Response $response,$args){
-            //     $id= $request->getAttribute('id');
-            //     $personnels = OutilsInformatiques::where('id', $id)->delete();
-            //     return $response->withStatus(200)
-            //                     ->withJson($personnels ) ;
-            // });
+            $app->delete("/delete/{id}", function(Request $request, Response $response,$args){
+                $id= $request->getAttribute('id');
+                $personnels = OutilsInformatiques::where('id', $id)->delete();
+                return $response->withStatus(200)
+                                ->withJson($personnels ) ;
+            });
         });
 
         

@@ -92,9 +92,11 @@
     <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des formations</div>
+                <div class="card-header">Liste des formations
+                    <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+                </div>
                 <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                      
@@ -117,9 +119,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom de l'école : {{formation.ecole}} </p>
-                                            <p class="card-text"> Date : {{formation.start_date | date:yMdjm}} - {{formation.end_date | date:yMdjm}}</p>
-                                            <p class="card-text"> Diplome : {{formation.diplome}}  <span> Domaine: {{formation.domaine}}</span> </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Nom de l'école :</span> {{formation.ecole}} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Date : </span> {{formation.start_date | date:yMdjm}} - {{formation.end_date | date:yMdjm}}</p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Diplome : </span>{{formation.diplome}}  
+                                                <span style="font-weight:bold" > Spécialité/filière: </span>{{formation.domaine}} </p>
                                         </div>
 
                                     </div>

@@ -43,10 +43,10 @@ export class LoginComponent implements OnInit {
 
                     this.loading = false;
                 }
-            // ((fiche: any) => {
-            //     this.data = fiche;
-            // })
-        });
+        }, error=>{
+            console.log("something wrong");
+            this.toastr.error('Erreur!', 'Identifiants Incorrect!');
+          });
 
 
       }

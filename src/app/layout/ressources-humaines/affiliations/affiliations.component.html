@@ -77,9 +77,11 @@
   <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
   <div class="row">
       <div class="col-md-12">
-      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+      <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
           <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des Affiliations</div>
+              <div class="card-header">Liste des Affiliations
+                <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+              </div>
               <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                      
@@ -103,9 +105,16 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom de l'association : {{branche.nom_association}} </p>
-                                            <p class="card-text"> Date : {{branche.start_date | date:yMdjm}} - {{branche.end_date | date:yMdjm}}</p>
-                                            <p class="card-text"> Objet : {{branche.objet}} </p>
+                                            <p class="card-text">
+                                                <span style="font-weight:bold"> Nom de l'association : </span>
+                                                 {{branche.nom_association}} 
+                                            </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Date : </span>
+                                                {{branche.start_date | date:yMdjm}} - {{branche.end_date | date:yMdjm}}
+                                            </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Objet : </span>
+                                                 {{branche.objet}} 
+                                            </p>
                                         </div>
 
                                     </div>

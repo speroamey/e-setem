@@ -97,9 +97,11 @@
     <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des Personnes Ressources </div>
+                <div class="card-header">Liste des Personnes Ressources 
+                    <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+                </div>
                 <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                      
@@ -122,10 +124,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom  : {{formation.last_name}} {{formation.first_name}} </p>
-                                            <p class="card-text"> Entreprise : {{formation.entreprise }} </p>
-                                            <p class="card-text"> Fonction : {{formation.fonctions}}  </p>
-                                            <p class="card-text"> Contact : {{formation.contact }} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Nom  : </span>{{formation.last_name}} {{formation.first_name}} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Entreprise : </span> {{formation.entreprise }} </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Fonction : </span>{{formation.fonctions}}  </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Contact : </span> {{formation.contact }} </p>
                                         </div>
 
                                     </div>

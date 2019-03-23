@@ -64,9 +64,11 @@
     <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des Outils Informatiques</div>
+                <div class="card-header">Liste des Outils Informatiques
+                    <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+                </div>
                 <div class="card-block table-responsive">
                     <table class="table table-hover table-striped">
                         <!-- <thead>
@@ -95,13 +97,11 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p></p>
-                                                    <p class="card-text"> Nom de l'outil : {{branche.nom}} </p>
-                                                    <p class="card-text"> Type d'outil : {{branche.type}} </p>
-                                                    <p class="card-text"> Niveau de maitrise : {{branche.niveau}} </p>
-                                                </div>
-
+                                                    <p class="card-text"> <span style="font-weight:bold" > Nom de l'outil :</span> {{branche.nom}} </p>
+                                                    <p class="card-text"> <span style="font-weight:bold" > Type d'outil : </span>{{branche.type}} </p>
+                                                    <p class="card-text"> <span style="font-weight:bold" > Niveau de maitrise : </span> {{branche.niveau}} </p>
+                                             </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </td>

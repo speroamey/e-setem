@@ -66,12 +66,12 @@ $app->group("/api", function() use ($app){
                                 ->withJson($formations );
             });
                 
-            // $app->delete("/delete/{id}", function(Request $request, Response $response,$args){
-            //     $id= $request->getAttribute('id');
-            //     $personnels = Formations::where('id', $id)->delete();
-            //     return $response->withStatus(200)
-            //                     ->withJson($personnels ) ;
-            // });
+            $app->delete("/delete/{id}", function(Request $request, Response $response,$args){
+                $id= $request->getAttribute('id');
+                $personnels = Formations::where('id', $id)->delete();
+                return $response->withStatus(200)
+                                ->withJson($personnels ) ;
+            });
         });
 
         

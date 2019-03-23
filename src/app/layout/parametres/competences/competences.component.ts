@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompetencesModalService } from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-competences',
@@ -18,6 +19,7 @@ export class CompetencesComponent implements OnInit {
   constructor(private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private pieceModalService: CompetencesModalService,
+    private toastr: ToastrService
   ) {
 
     this.competence = {};
@@ -32,8 +34,9 @@ export class CompetencesComponent implements OnInit {
     if (pres !== undefined) {
       let tmp = JSON.parse(JSON.stringify(pres))
       this.competence = tmp;
+    }else{
+      this.competence={};
     }
-    // console.log(this.competence)
     this.modalRef = this.modalService.open(content)
     this.modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -61,28 +64,33 @@ export class CompetencesComponent implements OnInit {
           let res = result.json();
           this.competences = res;
         }
-        //  return null;
+      },
+      
+      error=>{
+        console.log("something wrong");
       });
   }
 
   save() {
-
-
     if (this.competence.id) {
       //call service
       this.pieceModalService.update(this.competence.id, this.competence)
         .subscribe(result => {
-          console.log(this.competences);
-          let index = this.competences.findIndex((current) => {
-            return current.id = this.competence.id;
-          })
-          this.competences[index] = this.competence
+          for (let index = 0; index < this.competences.length; index++) {
+            if (this.competence.id==this.competences[index].id) {
+              this.competences[index] = this.competence;
+              break;
+            }
+          }
         });
       this.modalRef.dismiss(true);
     } else {
       this.pieceModalService.add(this.competence)
         .subscribe(result => {
           this.competences.push(result.json());
+        },
+        error=>{
+          this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
         });
       this.modalRef.dismiss(true);
     }
@@ -93,11 +101,8 @@ export class CompetencesComponent implements OnInit {
     // console.log(this.current);
     this.pieceModalService.remove(this.competence.id)
       .subscribe(result => {
+        console.log("something ");
         let data = result.json();
-        // console.log('jsut pr tester',data);
-        // if (data == 1) {
-        //   this.competences.splice(this.competence.id, 1);
-        // }
         this.competences.forEach((p, i) => {
           if (p.id === this.competence.id) {
             this.competences.splice(i, 1);
@@ -105,6 +110,10 @@ export class CompetencesComponent implements OnInit {
             console.log("nothing");
           }
         });
+      },
+      error=>{
+        console.log("something wrong");
+        this.toastr.error('Erreur objet lié!', 'Suppression impossible!');
       });
     this.modalRef.dismiss(true);
   }

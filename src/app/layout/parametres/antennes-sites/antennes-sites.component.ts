@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {AntennesSitesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AntennesSitesComponent implements OnInit {
   constructor(private modalService: NgbModal,
               public activeModal: NgbActiveModal,
                private pieceModalService:AntennesSitesModalService,
+               private toastr: ToastrService
                ) {
 
       this.antenne_site={};
@@ -30,12 +32,12 @@ export class AntennesSitesComponent implements OnInit {
   }
 
   open(content,pres?) {
-
     if(pres !== undefined){
       let tmp= JSON.parse(JSON.stringify(pres))
       this.antenne_site =tmp;
+    }else{
+      this.antenne_site={};
     }
-    // console.log(this.antenne_site)
     this.modalRef = this.modalService.open(content)
     this.modalRef.result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
@@ -57,26 +59,31 @@ export class AntennesSitesComponent implements OnInit {
 private load(){
   this.pieceModalService.load()
   .subscribe(result => {
-          // console.log("result");
           if (result) {
-            // console.log(result.json());
             let res = result.json();
             this.antennes_sites = res;
           }
-          //  return null;
   });
 }
 
 save(){
    if (this.antenne_site.id) {
-      //call service
       this.pieceModalService.update(this.antenne_site.id,this.antenne_site)
       .subscribe(result => {
         console.log( this.antennes_sites);
-          let index=this.antennes_sites.findIndex((current)=>{
-            return current.id=this.antenne_site.id;
-          })
-          this.antennes_sites[index]=this.antenne_site
+          // let index=this.antennes_sites.findIndex((current)=>{
+          //   return current.id=this.antenne_site.id;
+          // })
+          // this.antennes_sites[index]=this.antenne_site
+          for (let index = 0; index < this.antennes_sites.length; index++) {
+            if (this.antenne_site.id==this.antennes_sites[index].id) {
+              this.antennes_sites[index] = this.antenne_site;
+              break;
+            }
+          }
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       this.modalRef.dismiss(true);
   } else {

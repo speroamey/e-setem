@@ -49,9 +49,11 @@
 <div>
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des langues</div>
+                <div class="card-header">Liste des langues
+                    <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+                </div>
                 <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                       <tbody>
@@ -72,9 +74,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Lu : {{formation.lecture}} </p>
-                                            <p class="card-text"> Parlée : {{formation.parle}} </p>
-                                            <p class="card-text"> Ecrite : {{formation.ecriture}} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" >Lu : </span> {{formation.lecture}} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Parlée : </span> {{formation.parle}} </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Ecrite : </span>{{formation.ecriture}} </p>
                                         </div>
                                     </div>
                                 </div>

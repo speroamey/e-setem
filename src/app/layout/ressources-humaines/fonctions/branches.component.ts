@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BranchesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fonctions',
@@ -20,6 +21,7 @@ export class FonctionsComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:BranchesModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.fonction={};
@@ -85,6 +87,9 @@ export class FonctionsComponent implements OnInit {
       this.pieceModalService.add(this.fonction)
       .subscribe(result => {
           this.fonctions.push(result.json());
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       this.modalRef.dismiss(true);
     }

@@ -2,32 +2,29 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-      <h4 class="modal-title">Compétenceses</h4>
+      <h4 class="modal-title">Compétences</h4>
       <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
           <span aria-hidden="true">&times;</span>
       </button>
   </div>
   <div class="modal-body">
-          <form role="form" #brancheForm="ngForm" name="brancheForm">
+          <form role="form" #competenceForm="ngForm" name="competenceForm">
              
 
             <div class="form-group">
                 <label class="form-control-label" for="DescriptionCode">Code de la compétence</label>
-                <input type="text" class="form-control" [(ngModel)]="competence.code" name="libelle"  id="code" required>
+                <input type="text" class="form-control" [(ngModel)]="competence.code" name="code"  id="code" required>
             </div>
             <div class="form-group">
               <label class="form-control-label" for="DescriptionPiece">Libellé de la compétence</label>
               <input type="text" class="form-control" [(ngModel)]="competence.libelle" name="libelle"  id="libelle" required>
           </div>
-
            
-         
-
         </form>
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="brancheForm.form.invalid">Valider</button>
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="competenceForm.form.invalid">Valider</button>
   </div>
 </ng-template>
 
@@ -55,9 +52,13 @@
   <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
   <div class="row">
       <div class="col-md-12">
-      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+      <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
           <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des compétences</div>
+              <div class="card-header">Liste des compétences
+
+                <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+
+              </div>
               <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                       <thead>
@@ -76,9 +77,9 @@
                        
 
                           <td>
-                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', competence.id]">
+                              <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', competence.id]">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
-                              </span>
+                              </span> -->
                               <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,competence)">
                                   <i class="fa fa-pencil" aria-hidden="true"></i>
                               </span>

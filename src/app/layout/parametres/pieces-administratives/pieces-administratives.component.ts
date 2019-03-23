@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {PiecesAdministrativesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-pieces',
@@ -20,9 +21,11 @@ export class PiecesAdministrativesComponent implements OnInit {
     private current:any;
     private modalRef :any;
     private prestations:any[];
+     uploadData;
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:PiecesAdministrativesModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.piece={};
@@ -33,11 +36,9 @@ export class PiecesAdministrativesComponent implements OnInit {
     }
 
     open(content,pres?) {
-
       if(pres !== undefined){
         let tmp= JSON.parse(JSON.stringify(pres))
         let obj=new Date(tmp.expiration_date);
-
         let day = obj.getDate();
         let month = obj.getMonth()+1;
         let year = obj.getFullYear();
@@ -47,6 +48,8 @@ export class PiecesAdministrativesComponent implements OnInit {
           year:year
         }
         this.piece =tmp;
+      }else{
+        this.piece={};
       }
       // console.log(this.piece)
       this.modalRef = this.modalService.open(content)
@@ -80,9 +83,24 @@ export class PiecesAdministrativesComponent implements OnInit {
     });
   }
 
+  fileChange(event) {
+        let file: File = event.target.files[0];
+        console.log(file);
+        this.uploadData = new FormData();
+        this.uploadData.append('myFile', file, file.name);
+        // this.piece.file=file;
+        this.pieceModalService.add(this.uploadData)
+          .subscribe(result => {
+              // this.pieces.push(result.json());
+              console.log(result.json());
+              this.piece.file = result.json();
+          },
+          error=>{
+            this.toastr.error('Cette image ne peut etre enregistrer !', 'Erreur!');
+          });
+  }
+  
   save(){
-    console.log( this.piece);
-    
     let day = this.piece.expiration_date.day;
     let month = this.piece.expiration_date.month-1;
     let year = this.piece.expiration_date.year;
@@ -93,22 +111,24 @@ export class PiecesAdministrativesComponent implements OnInit {
     if (this.piece.id) {
         //call service
         this.pieceModalService.update(this.piece.id,this.piece)
-        .subscribe(result => {
-            // this.pieces.push(result);
-            let index=this.pieces.findIndex((current)=>{
-              return current.id=this.piece.id;
-            })
-            this.pieces[index]=this.piece
-        });
-        this.modalRef.dismiss(true);
+          .subscribe(result => {
+              // this.pieces.push(result);
+              let index=this.pieces.findIndex((current)=>{
+                return current.id=this.piece.id;
+              })
+              this.pieces[index]=this.piece
+          });
+          this.modalRef.dismiss(true);
     } else {
       this.pieceModalService.add(this.piece)
-      .subscribe(result => {
-          console.log(this.piece);
-          console.log(result.json());
+        .subscribe(result => {
+          console.log("cool", result.json());
           this.pieces.push(result.json());
-      });
-      this.modalRef.dismiss(true);
+        },
+        error=>{
+          this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
+        });
+        this.modalRef.dismiss(true);
     }
 
   }
@@ -118,16 +138,11 @@ export class PiecesAdministrativesComponent implements OnInit {
     this.pieceModalService.remove(this.piece.id)
     .subscribe(result => {
         let data=result.json();
-        console.log('jsut pr tester',data);
-        // if (data == 1) {
-        //   this.pieces.splice(this.piece.id, 1);
-        // }
         this.pieces.forEach((p, i) => {
                 if (p.id === this.piece.id) {
                   this.pieces.splice(i, 1);
                 }else{
                   console.log("nothing");
-                  
                 }
           });
     });

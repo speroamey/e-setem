@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { OutilsInformatiqueModalService } from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-outils-informatiques',
@@ -9,8 +10,8 @@ import { OutilsInformatiqueModalService } from './modal-service'
   styleUrls: ['./outils-informatiques.component.css'],
   animations: [routerTransition()]
 })
-export class OutilsInformatiquesComponent implements OnInit {
 
+export class OutilsInformatiquesComponent implements OnInit {
   closeResult: string;
   private branche: any;
   public branches: any[];
@@ -24,6 +25,7 @@ export class OutilsInformatiquesComponent implements OnInit {
   constructor(private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private pieceModalService: OutilsInformatiqueModalService,
+    private toastr: ToastrService
   ) {
 
     this.branche = {};
@@ -79,7 +81,6 @@ export class OutilsInformatiquesComponent implements OnInit {
   }
 
   save() {
-
     // this.branche.user_id = sessionStorage.getItem('user_id');
     if (this.user_id) {
       this.branche.user_id = this.user_id;
@@ -101,6 +102,9 @@ export class OutilsInformatiquesComponent implements OnInit {
       this.pieceModalService.add(this.branche)
         .subscribe(result => {
           this.branches.push(result.json());
+        },
+        error=>{
+          this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
         });
       this.modalRef.dismiss(true);
     }

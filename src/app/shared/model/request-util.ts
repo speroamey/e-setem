@@ -1,5 +1,5 @@
 import { URLSearchParams, BaseRequestOptions } from '@angular/http';
-export let HOST: string =  'http://127.0.0.1:8080';
+export let HOST: string =  'http://e-setem.bj';
 // 'http://e-setem.bj';
 // 'http://127.0.0.1';
 

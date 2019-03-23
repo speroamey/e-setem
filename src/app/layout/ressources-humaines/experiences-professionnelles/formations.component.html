@@ -91,9 +91,11 @@
     <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des Experiences Professionnelles</div>
+                <div class="card-header">Liste des Experiences Professionnelles
+                    <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+                </div>
                 <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                      
@@ -116,9 +118,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom de l'employeur : {{formation.nom_employeur}} </p>
-                                            <p class="card-text"> Date : {{formation.start_date | date:yMdjm}} - {{formation.end_date | date:yMdjm}}</p>
-                                            <p class="card-text"> Fonction/Poste : {{formation.fonctions}}  <span> Resumé: {{formation.resume}}</span> </p>
+                                            <p class="card-text">
+                                                <span style="font-weight:bold" > Nom de l'employeur : </span>{{formation.nom_employeur}} </p>
+                                            <p class="card-text"> <span style="font-weight:bold" >Date :</span> {{formation.start_date | date:yMdjm}} - {{formation.end_date | date:yMdjm}}</p>
+                                            <p class="card-text"><span style="font-weight:bold" > Fonction/Poste : </span> {{formation.fonctions}}  
+                                                <span style="font-weight:bold" >Resumé:</span> {{formation.resume}} 
+                                            </p>
                                         </div>
 
                                     </div>

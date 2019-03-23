@@ -19,7 +19,6 @@ export class PiecesAdministrativesModalService {
    load(user_id){
      const options: BaseRequestOptions = createRequestOption();
      options.headers.append('Content-Type','application/json')
-
      return this.http
        .get(`${this.plainteUrl+'list'}/${user_id}`, options)
          .map((res) => {
@@ -29,7 +28,8 @@ export class PiecesAdministrativesModalService {
 
   add(data){
     const options: BaseRequestOptions = createRequestOption();
-    options.headers.append('Content-Type','application/json')
+    // options.headers.append('Content-Type', 'multipart/form-data');
+    options.headers.append('Accept','application/json')
     console.log(data);
     return this.http
       .post(this.plainteUrl+'add', data, options)

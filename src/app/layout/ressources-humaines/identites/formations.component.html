@@ -66,7 +66,7 @@
       
        
                   <div class="form-group">
-                          <label class="form-control-label" for="IdPrestation">Sexe</label>
+                          <label class="form-control-label" for="sexe">Sexe</label>
                           <select class="form-control" [(ngModel)]="formation.sexe" name="sexes"id="sexes" required>
                               <option [ngValue]="sexe" *ngFor="let sexe of sexes">{{sexe}}</option>
                           </select>
@@ -155,11 +155,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <p></p>
-                                            <p class="card-text"> Nom & Prénoms: {{formation.last_name.toUpperCase()}} <span>   {{formation.first_name}}</span> </p>
-                                            <p class="card-text"> Date de naissance : {{formation.birthday | date:yMdjm}} </p>
-                                            <p class="card-text"> Sexe : {{formation.sexe}}</p>
-                                            <p class="card-text"> Titre : {{formation.titre}} <span>Email : {{formation.email}}</span>  </p>
-                                            <p class="card-text"> Adresse : {{formation.address}} <span> Tél : {{formation.phone}}</span> </p>
+                                            <p class="card-text"> <span style="font-weight:bold" >Nom & Prénoms: </span> {{formation.last_name.toUpperCase()}} <span>   {{formation.first_name}}</span> </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Date de naissance : </span> {{formation.birthday | date:yMdjm}} </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Sexe : </span> {{formation.sexe}}</p>
+                                            <p class="card-text"> <span style="font-weight:bold" > Titre : </span> {{formation.titre}} 
+                                                <span style="font-weight:bold" >Email : {{formation.email}}</span>  </p>
+                                            <p class="card-text"><span style="font-weight:bold" > Adresse : </span> {{formation.address}} 
+                                                <span style="font-weight:bold" > Tél : {{formation.phone}}</span> 
+                                            </p>
                                             <br>
                                         </div>
                                     </div>

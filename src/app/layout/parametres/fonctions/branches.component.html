@@ -55,9 +55,11 @@
   <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
   <div class="row">
       <div class="col-md-12">
-      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+      <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
           <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des fonctions</div>
+              <div class="card-header">Liste des fonctions
+                <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+              </div>
               <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                       <thead>
@@ -77,9 +79,9 @@
                           <!-- <td>{{fonction.expiration_date | date:yMdjm}}</td> -->
 
                           <td>
-                              <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', fonction.id]">
+                              <!-- <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" [routerLink]="['/plaintes', fonction.id]">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
-                              </span>
+                              </span> -->
                               <span class="text" style="margin-right:15px; cursor:pointer; color:blue;" (click)="open(content,fonction)">
                                   <i class="fa fa-pencil" aria-hidden="true"></i>
                               </span>

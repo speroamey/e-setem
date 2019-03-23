@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {SystemesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-systemes',
@@ -19,6 +20,7 @@ export class SystemesComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:SystemesModalService,
+                 private toastr: ToastrService
                 ) {
 
         this.systeme={};
@@ -30,10 +32,11 @@ export class SystemesComponent implements OnInit {
     }
 
     open(content,pres?) {
-
       if(pres !== undefined){
         let tmp= JSON.parse(JSON.stringify(pres))
         this.systeme =tmp;
+      }else{
+        this.systeme={};
       }
        console.log(this.systeme)
       this.modalRef = this.modalService.open(content)
@@ -68,23 +71,31 @@ export class SystemesComponent implements OnInit {
   }
 
   save(){
-    console.log( this.systeme);
-    
     if (this.systeme.id) {
         //call service
         this.pieceModalService.update(this.systeme.id,this.systeme)
         .subscribe(result => {
          
-            let index=this.systemes.findIndex((current)=>{
-              return current.id=this.systeme.id;
-            })
-            this.systemes[index]=this.systeme
+            // let index=this.systemes.findIndex((current)=>{
+            //   return current.id=this.systeme.id;
+            // })
+            // this.systemes[index]=this.systeme
+
+            for (let index = 0; index < this.systemes.length; index++) {
+              if (this.systeme.id==this.systemes[index].id) {
+                this.systemes[index] = this.systeme;
+                break;
+              }
+            }
         });
         this.modalRef.dismiss(true);
     } else {
       this.pieceModalService.add(this.systeme)
       .subscribe(result => {
           this.systemes.push(result.json());
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       this.modalRef.dismiss(true);
     }

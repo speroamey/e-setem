@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {BranchesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-affiliation',
@@ -22,6 +23,7 @@ export class AffiliationsComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:BranchesModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.branche={};
@@ -113,7 +115,6 @@ export class AffiliationsComponent implements OnInit {
         //call service
         this.pieceModalService.update(this.branche.id,this.branche)
         .subscribe(result => {
-          console.log( this.branches);
             let index=this.branches.findIndex((current)=>{
               return current.id=this.branche.id;
             })
@@ -124,6 +125,9 @@ export class AffiliationsComponent implements OnInit {
       this.pieceModalService.add(this.branche)
       .subscribe(result => {
           this.branches.push(result.json());
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       this.modalRef.dismiss(true);
     }

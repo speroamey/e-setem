@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {AptitudesModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-langues',
@@ -25,16 +26,17 @@ export class AptitudesComponent implements OnInit {
     competences: any[];
     branches: any[];
     competences_branches: any[];
-    item_c_b: any;
+    competenceBranche: any;
     cnd_update: boolean = false;
 
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:AptitudesModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.formation={};
-        this.item_c_b={};
+        this.competenceBranche={};
         this.formations=[];
         this.list={};
         this.lists=[];
@@ -72,17 +74,41 @@ export class AptitudesComponent implements OnInit {
     }
  
 
+
+    openCompetenceBrancheOfAptitudes(content,pres?,else_condition?) {
+      if(pres !== undefined){
+        let tmp= JSON.parse(JSON.stringify(pres))
+        this.competenceBranche =tmp;
+        console.log(this.competenceBranche);
+        this.onCompetenceChange(this.competenceBranche.competence_id);
+        this.cnd_update=true;        
+      }else{
+        this.competenceBranche={};
+      }
+
+      this.modalRef = this.modalService.open(content)
+      this.modalRef.result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+
+
     open(content,pres?,else_condition?) {
+      this.formation = {};
+      this.competenceBranche={};
+      this.lists=[];
+      this.list={};
       if(pres !== undefined && !else_condition){
         let tmp= JSON.parse(JSON.stringify(pres))
         this.formation =tmp;
-        console.log("le premier");
-        
-      }else if(pres !== undefined && else_condition =='cba'){
-        this.cnd_update=true;
-        let tmp= JSON.parse(JSON.stringify(pres))
-        this.item_c_b =tmp;
-        console.log("le deuxieme");
+      }else{
+        this.formation = {};
+        this.competenceBranche={};
+        this.lists=[];
+        this.list={};
       }
       this.modalRef = this.modalService.open(content)
       this.modalRef.result.then((result) => {
@@ -141,44 +167,56 @@ export class AptitudesComponent implements OnInit {
             }
     });
   }
+
+
   save(){
     this.formation.competences_branches=this.lists;
-     
       if (this.user_id) {
         this.formation.user_id = this.user_id;
       } else {
         this.formation.user_id = sessionStorage.getItem('user_id');
       }
-
       if ( this.cnd_update == true) {
-        this.pieceModalService.update_c_b_a(this.item_c_b.id,this.item_c_b)
+        this.pieceModalService.update_c_b_a(this.competenceBranche.id,this.competenceBranche)
             .subscribe(result => {
-              let index=this.formation.competences_branches.findIndex((current)=>{
-                return current.id=this.item_c_b.id;
-              })
-
-              this.formation.competences_branches[index]=this.item_c_b
+              for (let index = 0; index < this.formations.length; index++) {                
+                if (this.competenceBranche.aptitude_id == this.formations[index].id) {
+                  this.pieceModalService.loadCompetencesBranches(this.competenceBranche.aptitude_id)
+                    .subscribe(result => {
+                            if (result) {
+                              let res = result.json();                              
+                              this.formations[index].competences_branches=res;
+                            }
+                    });
+                    break;
+                }
+              }
+          },
+          error=>{
+            this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
           });
           // this.formation={};
-        
           this.modalRef.dismiss(true);
       }else 
         if(this.formation.id && this.cnd_update == false) {
           this.pieceModalService.update(this.formation.id,this.formation)
             .subscribe(result => {
-              let index=this.formations.findIndex((current)=>{
-                return current.id=this.formation.id;
-              })
+              // let index=this.formations.findIndex((current)=>{
+              //   return current.id=this.formation.id;
+              // })
 
-            this.pieceModalService.loadCompetencesBranches(this.formation.id)
-              .subscribe(result => {
-                      if (result) {
-                        let res = result.json();
-                        this.formation.competences_branches=res;
-                      }
-              });
-
-              this.formations[index]=this.formation
+              for (let index = 0; index < this.formations.length; index++) {
+                if (this.formation.id==this.formations[index].id) {
+                  this.formations[index] = this.formation;
+                  this.pieceModalService.loadCompetencesBranches(this.formation.id)
+                  .subscribe(result => {
+                            let res = result.json();
+                            this.formation.competences_branches=res;
+                  })
+                  break;
+                }
+              }
+              // this.formations[index]=this.formation
           });
           // this.formation={};
           this.modalRef.dismiss(true);
@@ -216,5 +254,28 @@ export class AptitudesComponent implements OnInit {
     });
     this.modalRef.dismiss(true);
   }
+
+  removeCompetenceBranche(){    
+    this.pieceModalService.removeCompetenceBranche(this.competenceBranche.id)
+    .subscribe(result => {
+        let data=result.json();
+          for (let index = 0; index < this.formations.length; index++) {
+            if (this.competenceBranche.aptitude_id == this.formations[index].id) {
+              this.formations[index].competences_branches.forEach((p, i) => {
+                if (p.id === this.competenceBranche.id) {
+                  this.formations[index].competences_branches.splice(i, 1);
+                }else{
+                  console.log("nothing");
+                }
+               });
+            }
+         }
+    },
+    error=>{
+      //something else
+    });
+    this.modalRef.dismiss(true);
+  }
+
 
 }

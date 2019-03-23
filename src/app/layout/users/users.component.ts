@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit {
     pushRightClass: string = 'push-right';
     context: any;
     modification: boolean=false;
+  role: string;
 
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
@@ -42,6 +43,7 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
      this.load();
+     this.role=sessionStorage.getItem('roles');
     }
 
     isToggled(): boolean {

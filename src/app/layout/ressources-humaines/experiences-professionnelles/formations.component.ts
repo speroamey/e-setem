@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { NgbModal, ModalDismissReasons,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {ExperiencessModalService} from './modal-service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-experiences',
@@ -22,6 +23,7 @@ export class ExperiencesComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 public activeModal: NgbActiveModal,
                  private pieceModalService:ExperiencessModalService,
+                 private toastr: ToastrService
                  ) {
 
         this.formation={};
@@ -133,6 +135,9 @@ export class ExperiencesComponent implements OnInit {
       this.pieceModalService.add(this.formation)
       .subscribe(result => {
           this.formations.push(result.json());
+      },
+      error=>{
+        this.toastr.error('Ce code/libellé existe déja !', 'Impossible d\'ajouter!');
       });
       // this.formation={};
       this.modalRef.dismiss(true);

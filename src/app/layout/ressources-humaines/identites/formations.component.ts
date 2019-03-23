@@ -119,15 +119,11 @@ export class IdentitesComponent implements OnInit {
       this.formation.user_id = sessionStorage.getItem('user_id');
     }
     this.formation.birthday = this.extractDay(this.formation.birthday);
-  
-    
     
     if (this.formation.id) {
-      
         //call service
         this.pieceModalService.update(this.formation.id,this.formation)
         .subscribe(result => {
-          console.log( this.formations);
             let index=this.formations.findIndex((current)=>{
               return current.id=this.formation.id;
             })

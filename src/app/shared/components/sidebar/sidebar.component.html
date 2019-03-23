@@ -82,7 +82,7 @@
 
 
         <div class="nested-menu" *ngIf="!user_role">
-            <a class="list-group-item" (click)="addExpandClass('rh')">
+            <a class="list-group-item" (click)="addExpandClass('rh')" [routerLink]="['/ressources-humaines/identites']">
                 <span class="chip"><i class="fa fa-fw fa-address-card-o"></i>&nbsp;Renseignements</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'rh'">

@@ -8,9 +8,7 @@
       </button>
   </div>
   <div class="modal-body">
-          <form role="form" #pieceForm="ngForm" name="pieceForm">
-             
-
+          <form role="form" #pieceForm="ngForm" name="pieceForm" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="form-control-label" for="DescriptionPiece">Libellé de la pièce</label>
                 <input type="text" class="form-control" [(ngModel)]="piece.libelle" name="libelle"  id="libelle" required>
@@ -46,8 +44,11 @@
                     </button>
                 </div>
             </div>
-         
 
+            <div class="form-group">
+                    <label class="form-control-label" for="validite">Charger le fichier</label>
+                    <input type="file" name="file" (change)="fileChange($event)" placeholder="Charger le fichier" accept=".pdf,.doc,.docx, .jpeg,.png,.jpg">
+            </div>
         </form>
   </div>
   <div class="modal-footer">
@@ -80,9 +81,12 @@
   <!-- <app-page-header [heading]="'Projets'" [icon]="'fa-table'"></app-page-header> -->
   <div class="row">
       <div class="col-md-12">
-      <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+      <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
           <div class="card mb-12 col-md-12">
-              <div class="card-header">Liste des Pièces administratives</div>
+              <div class="card-header">Liste des Pièces administratives
+                <button class="btn btn-float btn-primary btn-sm float-right"  (click)="open(content)"  type="button"><i class="fa fa-plus"></i></button>
+
+              </div>
               <div class="card-block table-responsive">
                   <table class="table table-hover table-striped">
                       <thead>

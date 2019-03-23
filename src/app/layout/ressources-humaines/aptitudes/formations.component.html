@@ -9,27 +9,29 @@
         <form role="form" #formationForm="ngForm" name="formationForm">
             <div class="form-group">
                 <label class="form-control-label" for="tache">Tâche</label>
-                <input type="text" class="form-control" [(ngModel)]="formation.aptitude" name="tache" id="tache" required>
+                <input type="text" class="form-control" [(ngModel)]="formation.aptitude" name="tache" id="tache"
+                    required>
             </div>
             <div class="form-group">
                 <label class="form-control-label" for="competence"> Compétences </label>
-                    <select class="form-control" [(ngModel)]="list.competence" (ngModelChange)="onCompetenceChange($event)" name="competence" id="competence">
-                        <option [ngValue]="competence.id" *ngFor="let competence of competences">{{competence.libelle}}</option>
-                    </select>
+                <select class="form-control" [(ngModel)]="list.competence" (ngModelChange)="onCompetenceChange($event)"
+                    name="competence" id="competence">
+                    <option [ngValue]="competence.id" *ngFor="let competence of competences">{{competence.libelle}}</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label class="form-control-label" for="branche"> Branches </label>
-                    <select class="form-control" [(ngModel)]="list.branche" name="branche"id="branche" >
-                        <option [ngValue]="branche.id" *ngFor="let branche of branches">{{branche.libelle}}</option>
-                    </select>
+                <select class="form-control" [(ngModel)]="list.branche" name="branche" id="branche">
+                    <option [ngValue]="branche.id" *ngFor="let branche of branches">{{branche.libelle}}</option>
+                </select>
             </div>
             <span style="float:left">
                 {{lists.length}} Ajout(s);
             </span>
-           <span style="float:right;">
-            <button type="button" class="btn btn-success" style="border-radius:80px !important"  (click)="addAptitudeList()">+</button>
-           </span>
+            <span style="float:right;" *ngIf="list.branche && list.competence">
+                <button type="button" class="btn btn-success" style="border-radius:80px !important" (click)="addAptitudeList()">+</button>
+            </span>
         </form>
     </div>
     <div class="modal-footer">
@@ -43,88 +45,105 @@
 
 
 <ng-template #content_c_b let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Editer</h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form role="form" #formationForm="ngForm" name="formationForm">
+            <div class="form-group">
+                <label class="form-control-label" for="competence"> Compétences </label>
+                <select class="form-control" [(ngModel)]="competenceBranche.competence_id" (ngModelChange)="onCompetenceChange($event)"
+                    name="competence" id="competence" required>
+                    <option [ngValue]="competence.id" *ngFor="let competence of competences">{{competence.libelle}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="branche"> Branches </label>
+                <select class="form-control" [(ngModel)]="competenceBranche.branche_id" name="branche" id="branche"
+                    required>
+                    <option [ngValue]="branche.id" *ngFor="let branche of branches">{{branche.libelle}}</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="formationForm.form.invalid">Valider</button>
+    </div>
+</ng-template>
+
+<ng-template #delete let-c="close" let-d="dismiss">
         <div class="modal-header">
-            <h4 class="modal-title">Editer</h4>
-            <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <h4 class="modal-title">Suppression</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
-            <form role="form" #formationForm="ngForm" name="formationForm">
-                <div class="form-group">
-                    <label class="form-control-label" for="competence"> Compétences </label>
-                        <select class="form-control" [(ngModel)]="item_c_b.competence" (ngModelChange)="onCompetenceChange($event)" name="competence" id="competence" required>
-                            <option [ngValue]="competence.id" *ngFor="let competence of competences">{{competence.libelle}}</option>
-                        </select>
-                </div>
-    
-                <div class="form-group">
-                    <label class="form-control-label" for="branche"> Branches </label>
-                        <select class="form-control" [(ngModel)]="item_c_b.branche" name="branche"id="branche" required>
-                            <option [ngValue]="branche.id" *ngFor="let branche of branches">{{branche.libelle}}</option>
-                        </select>
-                </div>
-               <!-- <span style="float:right;">
-                <button type="button" class="btn btn-success" style="border-radius:80px !important"  (click)="addAptitudeList()">+</button>
-               </span> -->
-            </form>
+            <div class="ustify-content-center">Confirmez la suppression ?</div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="formationForm.form.invalid">Valider</button>
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Non</button>
+      
+            <button type="button" class="btn btn-danger" (click)="removeCompetenceBranche()">Oui</button>
         </div>
-    </ng-template>
-
-
-
-
-
-
-
+</ng-template>
 <div>
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button>
+            <!-- <button class="btn btn-primary" (click)="open(content)"> + Ajouter</button> -->
             <div class="card mb-12 col-md-12">
-                <div class="card-header">Liste des aptitudes</div>
-               
-                <div class="card-block table-responsive">
-                  <table class="table table-hover table-striped">
-                      <tbody>
-                      <tr *ngFor="let formation of formations" style="cursor:pointer;">
-                          <td>
-                            <div class="card">
-                                <div class="card-header">
-                                    <span> {{formation.aptitude.toUpperCase()}} </span>
-                                    <span (click)="open(content,formation)" class="float-right btn btn-default float-right"
-                                        style="cursor:pointer;">
-                                        Modifier
-                                        <!-- <i class="fa fa-pencil" aria-hidden="true"></i> -->
-                                    </span>
-                                </div>
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title">Special title treatment</h5> -->
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <i class="fa fa-university" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p></p>
-                                            <p *ngFor="let item_c_b of formation.competences_branches">
-                                                   <span style="font-weight:bold"> Compétence </span> : {{item_c_b.c_libelle}} <br>
-                                                   <span style="font-weight:bold">Branche</span> : {{item_c_b.libelle}} 
-                                                        <i class="fa fa-pencil" (click)="open(content_c_b,item_c_b,'cba')" style="float:right"aria-hidden="true"></i>   
-                                            </p>
-                                         </div>
-                                    </div>
+                <div class="card-header">Liste des aptitudes
+                    <button class="btn btn-float btn-primary btn-sm float-right" (click)="open(content)" type="button">
+                        <i class="fa fa-plus"></i></button>
+                </div>
 
-                                </div>
-                            </div>
-                          </td>
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
+                <div class="card-block table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <tr *ngFor="let formation of formations" style="cursor:pointer;">
+                                <td>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <span> {{formation.aptitude.toUpperCase()}} </span>
+                                            <span (click)="open(content,formation)" class="float-right btn btn-default float-right"
+                                                style="cursor:pointer;">
+                                                Modifier
+                                            </span>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <i class="fa fa-university" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p></p>
+                                                    <p *ngFor="let competenceBranche of formation.competences_branches">
+                                                        <span style="font-weight:bold"> Compétence </span> :
+                                                        {{competenceBranche.c_libelle}} <br>
+                                                        <span style="font-weight:bold">Branche</span> :
+                                                        {{competenceBranche.libelle}}
+                                                        <span class="float-right">
+                                                            <i class="fa fa-pencil" (click)="openCompetenceBrancheOfAptitudes(content_c_b,competenceBranche,'cba')"
+                                                                style="margin-right:10px;" aria-hidden="true"></i>
+                                                            <i class="fa fa-trash" (click)="openCompetenceBrancheOfAptitudes(delete,competenceBranche)" aria-hidden="true"
+                                                                style="color:red"></i>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { FormsModule } from '@angular/forms';
+
 import {
     NgbCarouselModule,
     NgbAlertModule
@@ -20,7 +23,9 @@ import { StatModule } from '../../shared';
         CommonModule,
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
+        ChartsModule,
         DashboardRoutingModule,
+        FormsModule,
         StatModule,
     ],
     declarations: [
